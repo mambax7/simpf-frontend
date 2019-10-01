@@ -1,0 +1,40 @@
+<!-- start of site_header -->
+<div id="site_header">
+  <div id="clearfix">
+    <div id="site_header_logo">
+      <a href="<{$xoops_url}>/"><img src="<{$xoops_imageurl}>images/logo.png" alt="<{$xoops_sitename|escape|replace:'&amp;':'&'}>" title="<{$xoops_sitename|escape|replace:'&amp;':'&'}>" height="70" width="70" /></a>
+    </div>
+    <div id="site_header_title">
+      <h1><{$xoops_sitename|escape|replace:'&amp;':'&'}></h1>
+      <div id="site_header_subtitle"><img src="<{$xoops_imageurl}>images/jnode-mini.png" alt="INCF Japan Node" height="24" width="24" />Supported by INCF Japan Node</div>
+    </div>
+    <div id="site_header_searchbox">
+      <form action="<{$xoops_url}>/modules/xoonips/itemselect.php" method="get">
+        <input type="hidden" name="op" value="quicksearch"/>
+        <input type="hidden" name="search_itemtype" value="all"/>
+        <input class="formText" type="text" name="keyword" size="86" value="<{$xoonips_search_query}>"/>
+        <input class="formButton" type="submit" value="[ja]検索[/ja][en]Search[/en]"/>
+      </form>
+    </div>
+    <div id="site_header_toolbar">
+<{* user information *}>
+<{if $xoops_isuser}>
+      <!--img src="<{$xoops_imageurl}>images/user.gif" width="16" height="16" alt="" /-->
+      <a href="<{$xoops_url}>/viewpmsg.php"><img src="<{$xoops_imageurl}>images/mail.gif" width="16" height="16" alt="Inbox" title="Inbox" /></a>
+      <{if $xoops_isadmin}><a href="<{$xoops_url}>/admin.php"><img src="<{$xoops_imageurl}>images/configure.gif" width="16" height="16" alt="Admin Menu" title="Admin Menu" /></a><{/if}>
+      <a href="<{$xoops_url}>/user.php?op=logout"><img src="<{$xoops_imageurl}>images/logout.gif" width="16" height="16" alt="LOGOUT" title="LOGOUT" /></a>
+      <a href="<{$xoops_url}>/modules/xoonips/userinfo.php?uid=<{$xoops_userid}>"><{$xoops_uname}></a>
+      &nbsp;
+<{/if}>
+<{* language selector *}>
+<{if $mlang_use_ml }>
+  <{if $xoops_langcode == 'ja'}>
+      <a id="switch_lang" href="<{$mlang_pagenquery|escape|replace:'&amp;':'&'}>en">To English</a>
+  <{elseif $xoops_langcode == 'en'}>
+      <a id="switch_lang" href="<{$mlang_pagenquery|escape|replace:'&amp;':'&'}>ja">To Japanese</a>
+  <{/if}>
+<{/if}>
+    </div>
+  </div>
+</div>
+<!-- end of site_header -->

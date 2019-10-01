@@ -1,0 +1,105 @@
+<table class="outer">
+  <!-- Basic Information -->
+  <tr>
+    <td class="head"><{$basic.doi.name}></td>
+    <td class="<{cycle name="oddeven" values="odd,even"}>"><{$item_id}></td>
+  </tr>
+  <!-- Title -->
+  <tr>
+    <td width="30%" class="head"><{$basic.title.name}><{$smarty.const._MD_XOONIPS_ITEM_REQUIRED_MARK}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.title.value}></td>
+  </tr>
+  <!-- Model Contents URL -->
+  <tr>
+    <td width="30%" class="head"><{$smarty.const._MD_XNPONLINESIMULATION_MODEL_CONTENTS_URL}><{$smarty.const._MD_XOONIPS_ITEM_REQUIRED_MARK}></td>
+    <td class="<{cycle name="oddeven"}>"><{$detail.model_contents_url.value}></td>
+  </tr>
+  <!-- Download URL -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_DOWNLOAD_URL}><{$smarty.const._MD_XOONIPS_ITEM_REQUIRED_MARK}></td>
+    <td class="<{cycle name="oddeven"}>"><{$detail.download_url.value}></td>
+  </tr>
+  <!-- VM Type -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_VM_TYPE}><{$smarty.const._MD_XOONIPS_ITEM_REQUIRED_MARK}></td>
+    <td class="<{cycle name="oddeven"}>"><{$detail.vm_type.value}></td>
+  </tr>
+  <!-- Model Site Name -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_MODEL_SITE_NAME}><{$smarty.const._MD_XOONIPS_ITEM_REQUIRED_MARK}></td>
+    <td class="<{cycle name="oddeven"}>"><{$detail.model_site_name.value}></td>
+  </tr>
+  <!-- Simulator Name -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_SIMULATOR_NAME}></td>
+    <td class="<{cycle name="oddeven"}>"><{$detail.simulator_name.value}></td>
+  </tr>
+  <!-- Simulator Version -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_SIMULATOR_VERSION}></td>
+    <td class="<{cycle name="oddeven"}>"><{$detail.simulator_version.value}></td>
+  </tr>
+  <tr>
+    <td class="head"><{$basic.keywords.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.keywords.value}></td>
+  </tr>
+  <tr>
+    <td class="head"><{$basic.description.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.description.value|nl2br}></td>
+  </tr>
+<{if !empty($basic.last_update_date.value)}>
+  <tr>
+    <td class="head"><{$basic.last_update_date.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.last_update_date.value}></td>
+  </tr>
+<{/if}>
+<{if !empty($basic.creation_date.value)}>
+  <tr>
+    <td class="head"><{$basic.creation_date.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.creation_date.value}></td>
+  </tr>
+<{/if}>
+<{if !empty($basic.contributor.value)}>
+  <tr>
+    <td class="head"><{$basic.contributor.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.contributor.value}></td>
+  </tr>
+<{/if}>
+<{if !empty($basic.item_type.value)}>
+  <tr>
+    <td class="head"><{$basic.item_type.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.item_type.value}></td>
+  </tr>
+<{/if}>
+<{if !empty($basic.change_log.value)}>
+  <tr>
+    <td class="head"><{$basic.change_log.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.change_log.value}></td>
+  </tr>
+<{/if}>
+<{if !empty($basic.change_logs.value)}>
+  <tr>
+    <td class="head"><{$basic.change_logs.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.change_logs.value}></td>
+  </tr>
+<{/if}>
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_SCREENSHOT}></td>
+    <td class="<{cycle name="oddeven"}>"><{$preview.value}></td>
+  </tr>
+  <tr>
+    <td class="head"><{$index.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$index.value}></td>
+  </tr>
+  <tr>
+    <td class="head"><{$basic.related_to.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.related_to.value}></td>
+  </tr>
+</table>
+<input type="hidden" name="simulator_name" value="<{$detail.simulator_name.html_string}>"/>
+<input type="hidden" name="simulator_version" value="<{$detail.simulator_version.html_string}>"/>
+<input type="hidden" name="model_contents_url" value="<{$detail.model_contents_url.html_string}>"/>
+<input type="hidden" name="download_url" value="<{$detail.download_url.html_string}>"/>
+<input type="hidden" name="vm_type" value="<{$detail.vm_type.html_string}>"/>
+<input type="hidden" name="model_site_name" value="<{$detail.model_site_name.html_string}>"/>
+

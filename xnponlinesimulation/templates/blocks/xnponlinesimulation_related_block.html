@@ -1,0 +1,10 @@
+<div class="related_items">
+<{if !empty($items)}>
+<{foreach item=item from=$items}>
+  <{$item}>
+<{/foreach}>
+<br style="clear: both;" />
+<{else}>
+  <{$smarty.const._MB_XNPONLINESIMULATION_NO_RELATED_ITEM}>
+<{/if}>
+</div>

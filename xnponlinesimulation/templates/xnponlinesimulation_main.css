@@ -1,0 +1,164 @@
+/* item list */
+div.item_thumbnail {
+	width: 136px;
+	float: left;
+	margin: 0 24px 0 0;
+}
+div.item_thumbnail_screenshot {
+	background: url("<{$mod_url}>/images/thumbnail-bg.gif") no-repeat 0 0;
+	height: 111px;
+}
+div.item_thumbnail_screenshot img {
+	height: 85px;
+	width: 118px;
+	margin: 9px;
+}
+div.item_thumbnail_title {
+	padding: 0 6px 6px 6px;
+}
+div.item_thumbnail_title a,
+div.item_thumbnail_title a:visited,
+div.item_thumbnail_title a:hover {
+	font-size: 12px;
+	font-weight: bold;
+}
+div.item_thumbnail_date {
+	font-size: 10px;
+	color: #666666;
+	margin: 0 8px 24px 0;
+}
+
+/* item detail */
+div.item_detail h3 {
+	font: 20px Arial,Helvetica,sans-serif;
+}
+
+div.item_detail_screenshot,
+div.item_detail_screenshot_play,
+div.item_detail_screenshot img {
+	width: 620px;
+	height: 460px;
+}
+
+div.item_detail_screenshot_play {
+	position: absolute;
+	cursor: pointer;
+	z-index: 1;
+	background: url("<{$mod_url}>/images/screenshot-play.png") no-repeat 0 0;
+}
+
+div.item_detail_toolbar {
+	width: 620px;
+}
+
+div.item_detail_bookmarks {
+	padding: 10px 0 5px 0;
+	float: left;
+}
+
+div.item_detail_vdesktopsize {
+	padding: 10px 0 5px 0;
+	float: right;
+}
+
+div.item_detail_bookmarks div {
+	padding: 0 5px 5px 0;
+	float: left;
+}
+
+div.item_detail_info {
+	font-size: 10px;
+}
+
+div.item_detail_keywords {
+	padding: 5px 0;
+}
+
+button.item_detail_more_rollup,
+button.item_detail_more_rollup-hover,
+button.item_detail_more_rolldown,
+button.item_detail_more_rolldown-hover {
+	border: 0 none;
+	height: 35px;
+	width: 620px;
+	margin: 0 0 10px 0;
+	padding: 0 30px 0 0;
+	color: #888888;
+	text-align: right;
+}
+
+button.item_detail_more_rollup {
+	background: url("<{$mod_url}>/images/more-rollup.png") no-repeat 0 0;
+}
+
+button.item_detail_more_rollup:hover {
+	background: url("<{$mod_url}>/images/more-rollup-hover.png") no-repeat 0 0;
+}
+
+button.item_detail_more_rolldown {
+	background: url("<{$mod_url}>/images/more-rolldown.png") no-repeat 0 0;
+}
+
+button.item_detail_more_rolldown:hover {
+	background: url("<{$mod_url}>/images/more-rolldown-hover.png") no-repeat 0 0;
+}
+
+div.item_detail_metadata_button {
+	padding: 0 0 10px 0;
+}
+
+div#item_detail_metadata {
+	display: none;
+	padding: 10px 0;
+}
+
+div#item_detail_metadata table.outer {
+	width: 620px;
+	border: 1px solid #C0C0C0;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+div#item_detail_metadata td {
+	border-bottom: 1px solid #CCCCCC;
+	padding-left: 10px;
+}
+
+div#item_detail_metadata .head {
+	background: url("<{$mod_url}>/images/table-bg.png") no-repeat scroll right top transparent;
+	font-weight: normal;
+	padding-right: 10px;
+	text-align: right;
+	white-space: nowrap;
+}
+
+div#item_detail_metadata td.odd,
+div#item_detail_metadata tr.odd td {
+	background-color: #FFFFFF;
+	margin: 0;
+	padding 5px;
+}
+
+div#item_detail_metadata td.even,
+div#item_detail_metadata tr.even td {
+	background-color: #F2F2F2;
+	margin: 0;
+	padding 5px;
+}
+
+/* related to items */
+div.related_items div.item_thumbnail {
+	width: 285px;
+}
+div.related_items div.item_thumbnail div.item_thumbnail_screenshot {
+	width: 136px;
+	float: left;
+}
+div.related_items div.item_thumbnail div.item_thumbnail_metadata {
+	width: 140px;
+        margin: 3px;
+	float: right;
+}
+div.related_items div.item_thumbnail div.item_thumbnail_endmark {
+	clear: both;
+}

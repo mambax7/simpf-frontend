@@ -1,0 +1,43 @@
+<!-- start of site_menu -->
+<script type="text/javascript">
+// pull-down menu script
+(function($){
+  $(function () {
+    //drop down menu
+    $('#site_menu_globalnavi li').hover(
+      function () {
+        $('ul', this).stop(true, true).slideDown('normal');
+      }, function () {
+        $('ul', this).slideUp('normal');
+      });
+  });
+})(jQuery);
+</script>
+<div id="site_menu">
+  <div class="clearfix">
+    <ul id="site_menu_globalnavi">
+      <li><a href="<{$xoops_url}>/categories">[ja]カテゴリから選択[/ja][en]Categories[/en]</a></li>
+<!--
+      <li><a href="<{$xoops_url}>/modules/gridportal/">[ja]グリッドポータル[/ja][en]Grid Portal[/en]&nbsp;&raquo;</a>
+        <ul>
+          <li><a href="<{$xoops_url}>/modules/gridportal/grid-sim1-upload.php">[ja]シミュレーション[/ja][en]Simulation[/en]</a></li>
+          <li><a href="<{$xoops_url}>/modules/gridportal/monitor1-select.php">[ja]モニタリング[/ja][en]Monitoring[/en]</a></li>
+          <li><a href="<{$xoops_url}>/modules/gridportal/plot1-fileselect.php">[ja]結果[/ja][en]Results[/en]</a></li>
+          <li><a href="<{$xoops_url}>/modules/gridportal/sources.php">[ja]サーバ情報[/ja][en]Sources[/en]</a></li>
+        </ul>
+      </li>
+      <li><a href="<{$xoops_url}>/modules/forum/">[ja]フォーラム[/ja][en]Forums[/en]</a></li>
+-->
+      <li><a href="<{$xoops_url}>/links">[ja]リンク[/ja][en]Links[/en]</a></li>
+      <li><a href="<{$xoops_url}>/about">[ja]サイト情報[/ja][en]About This Site[/en]&nbsp;&raquo;</a>
+        <ul>
+          <li><a href="<{$xoops_url}>/instructions">[ja]ご利用上の注意[/ja][en]Instructions for Use[/en]</a></li>
+          <li><a href="<{$xoops_url}>/copyrights">[ja]著作権について[/ja][en]Copyrights[/en]</a></li>
+          <li><a href="<{$xoops_url}>/privacy">[ja]プライバシーポリシー[/ja][en]Privacy Policy[/en]</a></li>
+          <li><a href="<{$xoops_url}>/aboutus">[ja]運用母体[/ja][en]About Us[/en]</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- end of site_menu -->

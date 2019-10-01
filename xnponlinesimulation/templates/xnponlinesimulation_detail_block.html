@@ -1,0 +1,414 @@
+<script type="text/javascript" src="<{$mod_url}>/js/jquery-1.6.1.min.js">
+</script>
+<script type="text/javascript">
+<!--//
+jQuery.noConflict();
+
+var _SimPF = function() {
+  this.base_url = 'https://simpf.med.kanazawa-u.ac.jp/gateway/';
+  this.contents_url = this.base_url + '?url=<{$detail.download_url|escape:"url"}>&type=<{$detail.vm_type|escape:"url"}>';
+};
+_SimPF.prototype = {
+  getContentsUrl: function() {
+    var resolution = jQuery('#virtual_desktop_size').val();
+    return this.contents_url + '&dsize=' + resolution;
+  }
+};
+var SimPF = new _SimPF();
+
+<{if !$is_printable}>
+Shadowbox.init({
+  players: ["iframe","html"],
+});
+
+jQuery(function(){
+  jQuery('#item_detail_more').click(function() {
+    if (jQuery(this).attr('class') == 'item_detail_more_rollup') {
+      jQuery('#item_detail_metadata').slideDown('normal');
+      jQuery('#item_detail_more').attr('class', 'item_detail_more_rolldown');
+      jQuery('#item_detail_more').html('Show fewer');
+      jQuery('#item_detail_more').html('<{$smarty.const._MD_XNPONLINESIMULATION_SHOWFEWER}>');
+    } else {
+      jQuery('#item_detail_metadata').slideUp('normal');
+      jQuery('#item_detail_more').attr('class', 'item_detail_more_rollup');
+      jQuery('#item_detail_more').html('<{$smarty.const._MD_XNPONLINESIMULATION_SHOWMORE}>');
+    }
+  });
+
+  jQuery('.item_detail_screenshot_play').click(function(){
+    <{$mydirname}>_run_simulation();
+  });
+});
+
+function <{$mydirname}>_run_simulation() {
+  var userAgent = window.navigator.userAgent.toLowerCase();
+  var canvas = document.createElement('canvas');
+  if (userAgent.indexOf("msie") > -1) {
+    alert('IE is currently not supported!');
+  } else {
+    if (canvas.getContext) {
+      <{$mydirname}>_countup_link('contents');
+      Shadowbox.open({
+        content: SimPF.getContentsUrl(),
+        player:  'iframe',
+        options: { onFinish: function() {
+          el = jQuery('#sb-content');
+          if (el) {
+            el.bind('load', function() {
+              if (this.contentWindow)
+                this.contentWindow.focus();
+            });
+          }
+        }}
+      });
+    } else {
+      alert('HTML5 Canvas not supported!');
+    }
+  }
+}
+<{/if}>
+
+function <{$mydirname}>_countup_link(target) {
+  var backend = '<{$smarty.const.XOONIPS_URL}>/backend.php?itemtype=<{$mydirname}>&action=linkcount';
+  var params = 'item_id=<{$item_id}>&target=' + target;
+  jQuery.ajax({
+    type: 'POST',
+    url: backend,
+    data: params,
+    async: false
+  });
+  return true;
+}
+
+<{if $autorun}>
+jQuery.event.add(window, "load", function(){
+  <{$mydirname}>_run_simulation();
+});
+<{/if}>
+
+//-->
+</script>
+
+
+<div class="item_detail">
+
+<{if !$is_printable}>
+<h3><{$basic.title.value|nl2br}></h3>
+
+<div class="item_detail_screenshot">
+<div class="item_detail_screenshot_play"></div>
+<{if $screenshot}><img src="<{$screenshot.url|escape}>" alt="<{$screenshot.caption|simpf_escape}>" /><{/if}>
+</div>
+
+<!-- Toolbar -->
+<div class="item_detail_toolbar">
+
+<!-- Social Bookmarks -->
+<div class="item_detail_bookmarks">
+
+<!-- Twitter -->
+<div>
+<iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?url=<{$item_url|escape:"url"}>&amp;text=<{$basic.title.value}>&amp;via=simulationpf&amp;[ja]lang=ja&amp;[/ja]count=horizontal" style="width:[en]100px[/en][ja]125px[/ja]; height:20px;"></iframe>
+</div>
+
+<!-- facebook Like Button -->
+<div>
+<iframe src="https://www.facebook.com/plugins/like.php?locale=[en]en_US[/en][ja]ja_JP[/ja]&amp;href=<{$item_url|escape:"url"}>&amp;layout=button_count&amp;show_faces=false&amp;width=80&amp;action=like&amp;colorscheme=light&amp;height=20" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:[en]80px[/en][ja]105px[/ja]; height:20px;" allowtransparency="true"></iframe>
+</div>
+
+<{*
+<!-- facebook Share Button -->
+<div>
+<a name="fb_share"><script type="text/javascript">document.write('[en]Share[/en][ja]\u30b7\u30a7\u30a2[/ja]');</script></a>
+<script src="https://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+</div>
+*}>
+
+<!-- Google +1 -->
+<div>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<g:plusone size="medium" href="<{$item_url|simpf_escape}>"></g:plusone>
+</div>
+
+<!-- Evernote Site Memory (Clip) : Deprecated -->
+<!--
+<div>
+<script type="text/javascript" src="http://static.evernote.com/noteit.js"></script>
+<a href="#" onclick="Evernote.doClip({}); return false;"><img src="http://static.evernote.com/[en]article-clipper.png[/en][ja]article-clipper-jp.png[/ja]" alt="Clip to Evernote" /></a>
+</div>
+-->
+
+<!-- Hatena Bookmark -->
+<div>
+<a href="http://b.hatena.ne.jp/entry/<{$item_url}>" class="hatena-bookmark-button" data-hatena-bookmark-layout="simple" title="[en]Add this entry.[/en][ja]&#x3053;&#x306e;&#x30a8;&#x30f3;&#x30c8;&#x30ea;&#x30fc;&#x3092;&#x306f;&#x3066;&#x306a;&#x30d6;&#x30c3;&#x30af;&#x30de;&#x30fc;&#x30af;&#x306b;&#x8ffd;&#x52a0;[/ja]"><img src="https://b.hatena.ne.jp/images/entry-button/button-only@2x.png" alt="[en]Add this entry.[/en][ja]&#x3053;&#x306e;&#x30a8;&#x30f3;&#x30c8;&#x30ea;&#x30fc;&#x3092;&#x306f;&#x3066;&#x306a;&#x30d6;&#x30c3;&#x30af;&#x30de;&#x30fc;&#x30af;&#x306b;&#x8ffd;&#x52a0;[/ja]" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.hatena.ne.jp/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+<!-- GREE Social Feedback : https does not supported -->
+<!--
+<div>
+<iframe src="http://share.gree.jp/share?url=<{$item_url|escape:"url"}>&amp;type=0&amp;height=20" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" style="border:none; overflow:hidden; width:70px; height:20px;" allowtransparency="true"></iframe>
+</div>
+-->
+
+<!-- mixi Check -->
+<{* Registered mixi developer : Yoshihiro OKUMURA *}>
+<div>
+<a href="http://mixi.jp/share.pl" class="mixi-check-button" data-url="<{$item_url|escape}>" data-button="[en]button-3[/en][ja]button-1[/ja]" data-key="ca97d9ffa3284017171492f063d2e840549ff66b"><script type="text/javascript">document.write('[en]Check[/en][ja]\u30c1\u30a7\u30c3\u30af[/ja]');</script></a>
+<script type="text/javascript" src="https://static.mixi.jp/js/share.js"></script>
+</div>
+
+<!-- mixi Iine -->
+<{* Registered mixi developer : Yoshihiro OKUMURA *}>
+<!--
+<div>
+<iframe src="http://plugins.mixi.jp/favorite.pl?href=<{$item_url|escape:"url"}>&amp;service_key=ca97d9ffa3284017171492f063d2e840549ff66b&amp;show_faces=false" scrolling="no" frameborder="0" allowtransparency="true" style="border:0; overflow:hidden; width:75px; height:20px;"></iframe>
+</div>
+-->
+
+<br style="clear: both;" />
+
+<!-- Post to Twitter -->
+<!--
+<div>
+<a href="http://twib.jp/share?url=<{$item_url|escape:"url"}>" title="Post to Twitter" rel="nofollow" target="_blank"><img src="<{$mod_url}>/images/social-bookmark/twitter.gif" alt="Post to Twitter" title="Post to Twitter" width="18" height="18" /></a>
+</div>
+-->
+
+<!-- Yahoo Bookmark -->
+<div>
+<a href="http://bookmarks.yahoo.co.jp/bookmarklet/showpopup?t=<{$basic.title.value}>&amp;u=<{$item_url|escape:"url"}>&amp;ei=UTF-8" title="Bookmark this on Yahoo Bookmark" rel="nofollow" target="_blank"><img src="<{$mod_url}>/images/social-bookmark/yahoo.gif" alt="Bookmark this on Yahoo Bookmark" title="Bookmark this on Yahoo Bookmark" width="16" height="16" /></a>
+</div>
+
+<!-- delicious -->
+<div>
+<a href="http://delicious.com/save?url=<{$item_url|escape:"url"}>&amp;title=<{$basic.title.value}>" title="Bookmark this on Delicious" rel="nofollow" target="_blank"><img src="<{$mod_url}>/images/social-bookmark/delicious.gif" alt="Bookmark this on Delicious" title="Bookmark this on Delicious" width="16" height="16" /></a>
+</div>
+
+<!-- google -->
+<div>
+<a href="http://www.google.com/bookmarks/mark?op=add&amp;bkmk=<{$item_url|escape:"url"}>&amp;title=<{$basic.title.value}>" title="Bookmark this on Google Bookmarks" rel="nofollow" target="_blank"><img src="<{$mod_url}>/images/social-bookmark/google.gif" alt="Bookmark this on Google Bookmarks" title="Bookmark this on Google Bookmarks" width="16" height="16" /></a>
+</div>
+
+<!-- buzzurl -->
+<div>
+<a href="http://buzzurl.jp/entry/<{$item_url}>" title="Bookmark this on BuzzURL" rel="nofollow" target="_blank"><img src="<{$mod_url}>/images/social-bookmark/buzzurl.gif" alt="Bookmark this on BuzzURL" title="Bookmark this on BuzzURL" width="21" height="15" /></a>
+</div>
+
+<!-- stumbleupon -->
+<div>
+<a href="http://www.stumbleupon.com/submit?url=<{$item_url|escape:"url"}>&amp;title=<{$basic.title.value}>" title="Share on StumbleUpon" rel="nofollow" target="_blank"><img src="<{$mod_url}>/images/social-bookmark/stumbleupon.gif" alt="Share on StumbleUpon" title="Share on StumbleUpon" width="16" height="16" /></a>
+</div>
+
+<!-- GREE Share -->
+<div>
+<a href="http://gree.jp/?mode=share&amp;act=write&amp;url=<{$item_url|escape:"url"}>&amp;title=<{$basic.title.value}>&amp;site_type=website" title="Share on GREE" rel="nofollow" target="_blank"><img src="<{$mod_url}>/images/social-bookmark/gree.gif" alt="Share on GREE" title="Share on GREE" /></a>
+</div>
+
+<!-- livedoor clip -->
+<div>
+<a href="http://clip.livedoor.com/redirect?link=<{$item_url|escape:"url"}>&amp;title=<{$basic.title.value}>&amp;ie=utf-8" title="Bookmark this on Livedoor Clip" rel="nofollow" target="_blank"><img src="<{$mod_url}>/images/social-bookmark/livedoor.gif" alt="Bookmark this on Livedoor Clip" title="Bookmark this on Livedoor Clip" width="16" height="16" /></a></div>
+
+<!-- My Favorite -->
+<script type="text/javascript">
+<!--//
+function <{$mydirname}>_addBookmark(title,url) {
+  if (window.sidebar) {
+    window.sidebar.addPanel(title, url, '');
+  } else if (document.all) {
+    window.external.AddFavorite(url, title);
+  } else if (window.opera && window.print) {
+    return true;
+  } else {
+    alert('No Supported Browser!');
+  }
+}
+//-->
+</script>
+<div>
+<a href="javascript:void <{$mydirname}>_addBookmark(document.title, '<{$item_url}>');" title="Add Browser Bookmark"><img src="<{$mod_url}>/images/social-bookmark/favorite.gif" alt="Add Browser Bookmark" title="Add Browser Bookmark" /></a>
+</div>
+
+<br style="clear: both;" />
+</div>
+<div class="item_detail_vdesktopsize">
+vDesktop Size:
+<select id="virtual_desktop_size">
+<optgroup label="- 4:3 -">
+<option value="1600x1200">1600x1200</option>
+<option value="1280x1024">1280x1024</option>
+<option value="1024x768">1024x768</option>
+<option value="800x600">800x600</option>
+</optgroup>
+<optgroup label="- 16:9 -">
+<option value="1920x1080">1920x1080</option>
+<option value="1600x900">1600x900</option>
+<option value="1366x768" selected="selected">1366x768</option>
+</optgroup>
+</select>
+</div>
+<br style="clear: both;" />
+</div>
+
+<div class="item_detail_info">
+  <{$basic.contributor.name}>:<a href="<{$xoonips_url}>/showusers.php?uid=<{$basic.uid.value}>" target="_self"><{$basic.contributor.value}></a>
+  &nbsp;|&nbsp;
+  <{$basic.creation_date.name}>: <{$basic.creation_date.value}>
+  &nbsp;|&nbsp;
+  <{$smarty.const._MD_XNPONLINESIMULATION_VISITS}>:<{$viewed_count|simpf_escape}>
+  &nbsp;|&nbsp;
+  <{$smarty.const._MD_XNPONLINESIMULATION_RUNS}>:<{$detail.contents_count|simpf_escape}>
+</div>
+<div class="item_detail_keywords">
+  <{$basic.keywords.name}>:&nbsp;<{$basic.keywords.value}>
+</div>
+
+<{/if}>
+<div id="item_detail_metadata">
+
+<{if !$is_printable}>
+<div class="item_detail_metadata_button">
+<{if $modify_button_visible==1}>
+<form name="modify" action="edit.php" method="get">
+<input type="hidden" name="item_id" value="<{$item_id}>" />
+</form>
+<{/if}>
+
+<{if $delete_button_visible==1}>
+<form name="delete_item" action="detail.php" method="post">
+<input type="hidden" name="item_id" value="<{$item_id}>" />
+<input type="hidden" name="op" value="delete" />
+</form>
+<{/if}>
+
+<{if $print_button_visible==1}>
+<form name="print" action="detail.php" method="post" target="_blank">
+<input type="hidden" name="item_id" value="<{$item_id}>" />
+<input type="hidden" name="op" value="print" />
+<{if $doi != ''}>
+<input type="hidden" name="<{$doi_column_name}>" value="<{$doi}>" />
+<{/if}>
+</form>
+<{/if}>
+
+<form id="xoonips_certify_form" action="detail.php" method="post">
+<input type="hidden" name="index_id" />
+<input type="hidden" name="item_id" />
+<input type="hidden" name="op" value="" />
+</form>
+
+<form action="detail.php" name="detail_form" method="post">
+<{if $modify_button_visible==1}>
+<input class="formButton" type="button" value="<{$smarty.const._MD_XOONIPS_ITEM_MODIFY_BUTTON_LABEL}>" onclick="document.modify.submit();" />
+<{/if}>
+<{if $delete_button_visible==1}>
+<input class="formButton" type="button" value="<{$smarty.const._MD_XOONIPS_ITEM_DELETE_BUTTON_LABEL}>" onclick="delete_confirm()" />
+<{/if}>
+<{if $print_button_visible==1}>
+<input class="formButton" type="button" value="<{$smarty.const._MD_XOONIPS_ITEM_PRINT_FRIENDLY_BUTTON_LABEL}>" onclick="document.print.submit();" />
+<{/if}>
+<{if $export_enabled==1}>
+<input class="formButton" type="button"
+value="<{$smarty.const._MD_XOONIPS_EXPORT_BUTTON_LABEL}>"
+onclick="form.action='export.php'; op.value='config'; submit();" />
+<input type="hidden" name="op" value=""/>
+<input type="hidden" name="ids[]" value="<{$item_id}>"/>
+<{/if}>
+</form>
+</div>
+
+<{/if}>
+
+<table class="outer">
+  <!-- Basic Information -->
+  <tr>
+    <td class="head"><{$basic.doi.name}></td>
+    <td class="<{cycle name="oddeven" values="odd,even"}>"><{$item_id}></td>
+  </tr>
+  <tr>
+    <td width="30%" class="head"><{$basic.title.name}></td>
+    <td class="<{cycle name="oddeven" values="odd,even"}>"><{$basic.title.value|nl2br}></td>
+  </tr>
+  <tr>
+    <td class="head"><{$basic.keywords.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.keywords.value}></td>
+  </tr>
+  <tr>
+    <td class="head"><{$basic.description.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.description.value}></td>
+  </tr>
+  <tr>
+    <td class="head"><{$basic.last_update_date.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.last_update_date.value}></td>
+  </tr>
+  <tr>
+    <td class="head"><{$basic.creation_date.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.creation_date.value}></td>
+  </tr>
+  <tr>
+    <td class="head"><{$basic.contributor.name}></td>
+    <td class="<{cycle name="oddeven"}>"><a href="<{$xoonips_url}>/showusers.php?uid=<{$basic.uid.value}>" target="_self"><{$basic.contributor.value}></a></td>
+  </tr>
+  <tr>
+    <td class="head"><{$basic.item_type.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.item_type.value}></td>
+  </tr>
+  <tr>
+    <td class="head"><{$basic.change_logs.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.change_logs.value}></td>
+  </tr>
+  <!-- Model Contents URL -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_MODEL_CONTENTS_URL}></td>
+    <td class="<{cycle name="oddeven"}>">
+      <a href="<{$detail.model_contents_url|escape}>" target="_blank" onclick="return <{$mydirname}>_countup_link('model');"><{$detail.model_contents_url|simpf_escape}></a>
+      <br />
+     <{$smarty.const._MD_XNPONLINESIMULATION_HITS}>:<{$detail.model_contents_count|simpf_escape}>
+    </td>
+  </tr>
+  <!-- Model Site Name -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_MODEL_SITE_NAME}></td>
+    <td class="<{cycle name="oddeven"}>"><{$detail.model_site_name|simpf_escape}></td>
+  </tr>
+  <!-- Simulator Name -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_SIMULATOR_NAME}></td>
+    <td class="<{cycle name="oddeven"}>"><{$detail.simulator_name|simpf_escape}></td>
+  </tr>
+  <!-- Simulator Version -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_SIMULATOR_VERSION}></td>
+    <td class="<{cycle name="oddeven"}>"><{$detail.simulator_version|simpf_escape}></td>
+  </tr>
+  <tr>
+    <td class="head"><{$index.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$index.value}></td>
+  </tr>
+<{if $is_printable}>
+  <tr>
+    <td class="head"><{$basic.related_to.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.related_to.value}></td>
+  </tr>
+<{/if}>
+</table>
+<{if $is_editable}>
+<form id="xoonips_edit_form" action="#">
+<{$basic.hidden}>
+<input type="hidden" name="simulator_name" value="<{$detail.simulator_name|simpf_escape}>"/>
+<input type="hidden" name="simulator_version" value="<{$detail.simulator_version|simpf_escape}>"/>
+<input type="hidden" name="model_contents_url" value="<{$detail.model_contents_url|simpf_escape}>"/>
+<input type="hidden" name="download_url" value="<{$detail.download_url|simpf_escape}>"/>
+<input type="hidden" name="vm_type" value="<{$detail.vm_type|simpf_escape}>"/>
+<input type="hidden" name="model_site_name" value="<{$detail.model_site_name|simpf_escape}>"/>
+<{$preview.hidden}>
+<{$index.hidden}>
+</form>
+<{/if}>
+
+</div><!-- item_detail_metadata -->
+
+<{if !$is_printable}>
+<button id="item_detail_more" class="item_detail_more_rollup"><{$smarty.const._MD_XNPONLINESIMULATION_SHOWMORE}></button>
+<{/if}>
+
+</div>

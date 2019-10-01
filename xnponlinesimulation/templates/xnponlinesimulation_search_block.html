@@ -1,0 +1,66 @@
+<table class="outer">
+  <tr>
+   <th align="left"><{$module_display_name|simpf_escape}><input type="hidden" name="<{$module_name}>" value="on"/></th>
+  </tr>
+</table>
+<table class="outer">
+  <!-- Basic Information -->
+  <tr>
+    <td class="head"><{$basic.doi.name}></td>
+    <td class="<{cycle name="oddeven" values="odd,even"}>"><{$basic.doi.value}></td>
+  </tr>
+  <tr>
+    <td width="30%" class="head"><{$basic.title.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.title.value}></td>
+  </tr>
+  <!-- Model Contents URL -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_MODEL_CONTENTS_URL}></td>
+    <td class="<{cycle name="oddeven"}>">
+        <input type="text" name="<{$module_name}>_model_contents_url" size="80" value=""/><br />
+    </td>
+  </tr>
+  <!-- Download Url -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_DOWNLOAD_URL}></td>
+    <td class="<{cycle name="oddeven"}>">
+      <input size="50" type="text" name="<{$module_name}>_download_url" value=""/>
+    </td>
+  </tr>
+  <!-- VM Type -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_VM_TYPE}></td>
+    <td class="<{cycle name="oddeven"}>">
+      <input size="50" type="text" name="<{$module_name}>_vm_type" value=""/>
+    </td>
+  </tr>
+  <!-- Model Site Name -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_MODEL_SITE_NAME}></td>
+    <td class="<{cycle name="oddeven"}>">
+      <input size="50" type="text" name="<{$module_name}>_model_site_name" value=""/>
+    </td>
+  </tr>
+  <!-- Simulator Name -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_SIMULATOR_NAME}></td>
+    <td class="<{cycle name="oddeven"}>">
+      <input size="50" type="text" name="<{$module_name}>_simulator_name" value=""/>
+    </td>
+  </tr>
+  <!-- Simulator Version -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_SIMULATOR_VERSION}></td>
+    <td class="<{cycle name="oddeven"}>">
+      <input size="50" type="text" name="<{$module_name}>_simulator_version" value=""/>
+    </td>
+  </tr>
+  <tr>
+    <td class="head"><{$basic.keywords.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.keywords.value}></td>
+  </tr>
+  <tr>
+    <td class="head"><{$basic.description.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.description.value}></td>
+  </tr>
+</table>

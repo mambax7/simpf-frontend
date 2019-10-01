@@ -1,0 +1,90 @@
+<!-- start of site_main -->
+<div id="site_main">
+
+<div class="clearfix">
+<{if $xoops_showlblock == 1 || $xoops_showrblock == 1}>
+<div id="site_main_container">
+<{/if}>
+
+<div id="site_main_panel">
+<{if $xoops_showcblock == 1}>
+<{foreach item=block from=$xoops_ccblocks}>
+<{if $block.title|regex_replace:'/^none( .*)?/':'none' ne 'none'}>
+  <div class="blockContainer">
+    <div class="blockTitle"><{$block.title}></div>
+    <div class="blockContent"><{$block.content}></div>
+  </div>
+<{else}>
+  <div class="content"><{$block.content}></div>
+<{/if}>
+<{/foreach}>
+  <div class="clearfix">
+    <div id="site_main_lcolumn">
+<{foreach item=block from=$xoops_clblocks}>
+<{if $block.title|regex_replace:'/^none( .*)?/':'none' ne 'none'}>
+      <div class="blockContainer">
+        <div class="blockTitle"><{$block.title}></div>
+        <div class="blockContent"><{$block.content}></div>
+      </div>
+<{else}>
+      <div class="content"><{$block.content}></div>
+<{/if}>
+<{/foreach}>
+    </div>
+    <div id="site_main_rcolumn">
+<{foreach item=block from=$xoops_crblocks}>
+<{if $block.title|regex_replace:'/^none( .*)?/':'none' ne 'none'}>
+      <div class="blockContainer">
+        <div class="blockTitle"><{$block.title}></div>
+        <div class="blockContent"><{$block.content}></div>
+      </div>
+<{else}>
+      <div class="content"><{$block.content}></div>
+<{/if}>
+<{/foreach}>
+    </div>
+  </div>
+<{/if}>
+  <div class="content"><{$xoops_contents}></div>
+</div>
+
+<{if $xoops_showlblock == 1 || $xoops_showrblock == 1}>
+</div><!-- end of site_main_container -->
+
+<div id="site_utilities_container">
+<div id="site_utilities_panel">
+<{if $xoops_showlblock == 1}>
+<!-- Start left blocks loop -->
+<{foreach item=block from=$xoops_lblocks}>
+<{if $block.title|regex_replace:'/^none( .*)?/':'none' ne 'none'}>
+  <div class="blockContainer">
+    <div class="blockTitle"><{$block.title}></div>
+    <div class="blockContent"><{$block.content}></div>
+  </div>
+<{else}>
+  <div class="content"><{$block.content}></div>
+<{/if}>
+<{/foreach}>
+<!-- End left blocks loop -->
+<{/if}>
+<{if $xoops_showrblock == 1}>
+<!-- Start right blocks loop -->
+<{foreach item=block from=$xoops_rblocks}>
+<{if $block.title|regex_replace:'/^none( .*)?/':'none' ne 'none'}>
+  <div class="blockContainer">
+    <div class="blockTitle"><{$block.title}></div>
+    <div class="blockContent"><{$block.content}></div>
+  </div>
+<{else}>
+  <div class="content"><{$block.content}></div>
+<{/if}>
+<{/foreach}>
+<!-- End right blocks loop -->
+<{/if}>
+</div>
+</div>
+<{/if}>
+
+</div>
+</div>
+<!-- end of site_main -->

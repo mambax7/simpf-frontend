@@ -1,0 +1,231 @@
+<script type="text/javascript" src="<{$mod_url}>/js/jquery-1.6.1.min.js">
+</script>
+<script type="text/javascript" src="<{$mod_url}>/js/jquery.nijc.suggest.js">
+</script>
+<script type="text/javascript">
+<!--
+jQuery.noConflict();
+
+jQuery(function(){
+  jQuery('#<{$mydirname}>_model_site_name').NijcSuggest({url: 'http://sim.neuroinf.jp/modules/xoonips/backend.php', params:'itemtype=<{$mydirname}>&action=suggest&t=model_site_name&q=', size:5});
+  jQuery('#<{$mydirname}>_simulator_name').NijcSuggest({url: 'http://sim.neuroinf.jp/modules/xoonips/backend.php', params:'itemtype=<{$mydirname}>&action=suggest&t=simulator_name&q=', size:5});
+  jQuery('#<{$mydirname}>_simulator_version').NijcSuggest({url: 'http://sim.neuroinf.jp/modules/xoonips/backend.php', params:'itemtype=<{$mydirname}>&action=suggest&t=simulator_version&q=', size:5});
+});
+
+// return true if all required parameters are filled
+function onSubmitItemType(form) {
+  // model contents url
+  if (!xoonips_formchecker.isFilledInputText(form.model_contents_url)) {
+    window.alert('<{$smarty.const._MD_XNPONLINESIMULATION_ERR_MODEL_CONTENTS_URL_REQUIRED|simpf_escape:"javascript"}>'); 
+    form.model_contents_url.focus();
+    return false;
+  }
+  if (!form.model_contents_url.value.match(/^https?:\/\/|^ftp:\/\//)) {
+    window.alert('<{$smarty.const._MD_XNPONLINESIMULATION_ERR_INVALID_MODEL_CONTENTS_URL|simpf_escape:"javascript"}>'); 
+    xoonips_formchecker.applyStyle(form.model_contents_url, 'error');
+    form.model_contents_url.focus();
+    return false;
+  }
+  // model site name
+  if (!xoonips_formchecker.isFilledInputText(form.model_site_name)) {
+    window.alert('<{$smarty.const._MD_XNPONLINESIMULATION_ERR_MODEL_SITE_NAME_REQUIRED|simpf_escape:"javascript"}>'); 
+    form.model_site_name.focus();
+    return false;
+  }
+  // download url
+  if (!xoonips_formchecker.isFilledInputText(form.download_url)) {
+    window.alert('<{$smarty.const._MD_XNPONLINESIMULATION_ERR_DOWNLOAD_URL_REQUIRED|simpf_escape:"javascript"}>'); 
+    form.download_url.focus();
+    return false;
+  }
+  if (!form.download_url.value.match(/^(https?:\/\/|ftp:\/\/|demo:|simpf:)/)) {
+    window.alert('<{$smarty.const._MD_XNPONLINESIMULATION_ERR_INVALID_DOWNLOAD_URL|simpf_escape:"javascript"}>'); 
+    xoonips_formchecker.applyStyle(form.download_url, 'error');
+    form.download_url.focus();
+    return false;
+  }
+  // vm type
+  if (!xoonips_formchecker.isFilledInputText(form.vm_type)) {
+    window.alert('<{$smarty.const._MD_XNPONLINESIMULATION_ERR_VM_TYPE_REQUIRED|simpf_escape:"javascript"}>'); 
+    form.vm_type.focus();
+    return false;
+  }
+  return true;
+}
+
+// xoonips_item complete request
+function <{$mydirname}>_xoonips_item_complete() {
+  var el = document.getElementById('<{$mydirname}>_complete_button');
+  el.disabled = true;
+<{if $is_register}>
+  var form = document.getElementById('xoonips_registerform');
+<{else}>
+  var form = document.getElementById('xoonips_editform');
+<{/if}>
+  var model_contents_url = form.model_contents_url.value;
+  var url = '<{$xoonips_url}>/backend.php?itemtype=<{$mydirname}>&action=item_fillin';
+  var params = 'url=' + encodeURIComponent(model_contents_url);
+  var myAjax = new Ajax.Request(url, {
+    method: 'get',
+    parameters: params,
+    requestHeaders: ['Referer', '<{$xoonips_url}>/edit.php'],
+    onComplete: <{$mydirname}>_xoonips_item_oncomplete,
+    onFilure: <{$mydirname}>_xoonips_item_onfailure
+  });
+  return false;
+}
+
+function <{$mydirname}>_xoonips_item_oncomplete(request) {
+  if (! request.responseText.isJSON()) {
+    alert('informal result returend from backend query : ' + request.responseText);
+  } else {
+    <{$mydirname}>_xoonips_item_fillin(request);
+  }
+  var el = document.getElementById('<{$mydirname}>_complete_button');
+  el.disabled = false;
+}
+
+function <{$mydirname}>_xoonips_item_onfailure(request) {
+  alert('failed to request backend query');
+  var el = document.getElementById('<{$mydirname}>_complete_button');
+  el.disabled = false;
+}
+
+function <{$mydirname}>_xoonips_item_fillin(request) {
+  var json = eval('(' + request.responseText + ')');
+  if (typeof (json.error) == 'string') {
+    alert(json.error);
+  } else {
+<{if $is_register}>
+    var form = document.getElementById('xoonips_registerform');
+<{else}>
+    var form = document.getElementById('xoonips_editform');
+<{/if}>
+    form.title.value = json.title;
+    var keywords = '';
+    for (var i = 0; i < json.keywords.length; i++) {
+      if (i != 0) keywords += ',';
+      keywords += json.keywords[i];
+    }
+    form.keywords.value = keywords;
+    form.model_site_name.value = json.site_name;
+    form.simulator_name.value = json.simulator;
+    form.description.value = json.rights + json.description;
+  }
+  return true;
+}
+
+//-->
+</script>
+
+<table class="outer">
+  <!-- Basic Information -->
+  <tr>
+    <td class="head"><{$basic.doi.name}></td>
+    <td class="<{cycle name="oddeven" values="odd,even"}>"><{$item_id}><input name="doi" value="" type="hidden" /></td>
+  </tr>
+  <!-- Title -->
+  <tr>
+    <td width="30%" class="head"><{$basic.title.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.title.value}></td>
+  </tr>
+  <!-- Model Contents URL -->
+  <tr>
+    <td width="30%" class="head"><{$smarty.const._MD_XNPONLINESIMULATION_MODEL_CONTENTS_URL}><{$smarty.const._MD_XOONIPS_ITEM_REQUIRED_MARK}></td>
+    <td class="<{cycle name="oddeven"}>">
+        <input type="text" name="model_contents_url" size="80" value="<{$detail.model_contents_url|escape}>"/><br />
+        <button id="<{$mydirname}>_complete_button" class="formButton" type="button" onclick="<{$mydirname}>_xoonips_item_complete();">Complete</button>
+    </td>
+  </tr>
+  <!-- Download URL -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_DOWNLOAD_URL}><{$smarty.const._MD_XOONIPS_ITEM_REQUIRED_MARK}></td>
+    <td class="<{cycle name="oddeven"}>">
+      <input size="80" type="text" name="download_url" value="<{$detail.download_url|escape}>"/>
+    </td>
+  </tr>
+  <!-- VM Type -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_VM_TYPE}><{$smarty.const._MD_XOONIPS_ITEM_REQUIRED_MARK}></td>
+    <td class="<{cycle name="oddeven"}>">
+      <{html_options name="vm_type" options=$vm_types selected=$detail.vm_type}>
+    </td>
+  </tr>
+  <!-- Model Site Name -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_MODEL_SITE_NAME}><{$smarty.const._MD_XOONIPS_ITEM_REQUIRED_MARK}></td>
+    <td class="<{cycle name="oddeven"}>">
+      <input id="<{$mydirname}>_model_site_name" size="50" type="text" name="model_site_name" value="<{$detail.model_site_name|simpf_escape}>"/>
+    </td>
+  </tr>
+  <!-- Simulator Name -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_SIMULATOR_NAME}></td>
+    <td class="<{cycle name="oddeven"}>">
+      <input id="<{$mydirname}>_simulator_name" size="50" type="text" name="simulator_name" value="<{$detail.simulator_name|simpf_escape}>"/>
+    </td>
+  </tr>
+  <!-- Simulator Version -->
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_SIMULATOR_VERSION}></td>
+    <td class="<{cycle name="oddeven"}>">
+      <input id="<{$mydirname}>_simulator_version" size="50" type="text" name="simulator_version" value="<{$detail.simulator_version|simpf_escape}>"/>
+    </td>
+  </tr>
+  <tr>
+    <td class="head"><{$basic.keywords.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.keywords.value}></td>
+  </tr>
+  <tr>
+    <td class="head"><{$basic.description.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.description.value}></td>
+  </tr>
+<{if !empty($basic.last_update_date.value) }>
+  <tr>
+    <td class="head"><{$basic.last_update_date.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.last_update_date.value}></td>
+  </tr>
+<{/if}>
+<{if !empty($basic.creation_date.value) }>
+  <tr>
+    <td class="head"><{$basic.creation_date.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.creation_date.value}></td>
+  </tr>
+<{/if}>
+<{if !empty($basic.contributor.value) }>
+  <tr>
+    <td class="head"><{$basic.contributor.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.contributor.value}></td>
+  </tr>
+<{/if}>
+<{if !empty($basic.item_type.value) }>
+  <tr>
+    <td class="head"><{$basic.item_type.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.item_type.value}></td>
+  </tr>
+<{/if}>
+<{if !empty($basic.change_log.value) }>
+  <tr>
+    <td class="head"><{$basic.change_log.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.change_log.value}></td>
+  </tr>
+<{/if}>
+<{if !empty($basic.change_logs.value) }>
+  <tr>
+    <td class="head"><{$basic.change_logs.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.change_logs.value}></td>
+  </tr>
+<{/if}>
+  <tr>
+    <td class="head"><{$smarty.const._MD_XNPONLINESIMULATION_SCREENSHOT}></td>
+    <td class="<{cycle name="oddeven"}>"><{$preview.value}></td>
+  </tr>
+  <tr>
+    <td class="head"><{$index.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$index.value}></td>
+  </tr>
+  <tr>
+    <td class="head"><{$basic.related_to.name}></td>
+    <td class="<{cycle name="oddeven"}>"><{$basic.related_to.value}></td>
+  </tr>
+</table>

@@ -1,0 +1,11 @@
+<detail id="<{$item_id}>">
+  <download_url><{$detail.download_url|simpf_escape}></download_url>
+  <vm_type><{$detail.vm_type|simpf_escape}></vm_type>
+  <contents_count><{$detail.contents_count|simpf_escape}></contents_count>
+  <model_contents_url><{$detail.model_contents_url|simpf_escape}></model_contents_url>
+  <model_contents_count><{$detail.model_contents_count|simpf_escape}></model_contents_count>
+  <model_site_name><{$detail.model_site_name|simpf_escape}></model_site_name>
+  <simulator_name><{$detail.simulator_name|simpf_escape}></simulator_name>
+  <simulator_version><{$detail.simulator_version|simpf_escape}></simulator_version>
+<{$screenshot_xml}>
+</detail>

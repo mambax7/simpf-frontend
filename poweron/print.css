@@ -1,0 +1,614 @@
+/* Yahoo fonts.css 2.7.0
+http://developer.yahoo.net/yui/license.txt
+- Font size Adjustment.
+http://developer.yahoo.com/yui/examples/fonts/fonts-size_source.html
+*/
+body{font:13px/1.231 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;}select,input,button,textarea{font:99% arial,helvetica,clean,sans-serif;}table{font-size:inherit;font:100%;}pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:100%;}
+
+body {
+	color: #000000;
+	background-color: #FFFFFF;
+	margin: 0;
+	padding: 0;
+	min-width:630px;
+	font-size: 80%;
+}
+
+a {
+	font-weight: normal;
+	text-decoration: none;
+}
+
+a, a:visited, a:hover {
+	color: #3366CC;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus, textarea:focus, input:focus {
+	outline: 1px solid #AAAAAA;
+}
+
+div {
+	margin: 0;
+	padding: 0;
+}
+
+table {
+	width: 100%;
+}
+
+td {
+	margin : 0;
+	padding: 0;
+	vertical-align: top;
+	border: 0;
+}
+
+th {
+	background: #778899;
+	color: #FFFFFF;
+	padding: 2px;
+	vertical-align: middle;
+}
+
+th a {
+	color: #FFFFFF;
+}
+
+p {
+	margin: 0;
+	padding: 5px;
+	line-height: 1.4;
+}
+
+h1, h2, h3, h4, h5 { color: #000000; }
+h1 { font-size: 2em; margin: .67em 0 .34em 0 }
+h2 { font-size: 1.5em; margin: .75em 0 .38em 0 }
+h3 { font-size: 1.17em; margin: .83em 0 .42em 0 }
+h4 { font-size: 1em;  margin: 1.12em 0 .56em 0 }
+h5 { font-size: .83em; margin: 1.5em 0 .75em 0 }
+h6 { font-size: .75em; margin: 1.67em 0 .84em 0 }
+
+ul {
+	text-align: left;
+	margin: 2px 2px 2px 15px;
+	padding: 2px;
+	list-style: square outside;
+}
+
+input {
+	font-size: 0.9em;
+}
+
+select {
+	font-size: 0.9em;
+}
+
+textarea {
+	font-size: 0.9em;
+}
+
+img {
+	border: 0;
+	vertical-align: middle;
+}
+
+/* -- clearfix -- */
+/* see: http://nicolasgallagher.com/micro-clearfix-hack/ */
+/* For modern browsers */
+.clearfix:before, .clearfix:after {
+	content: "";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+/* For IE 6/7 (trigger hasLayout) */
+.clearfix {
+	zoom: 1;
+}
+
+/* -- site header -- */
+div#site_header {
+	font: Arial, Helvetica, sans-serif;
+	background: url(images/title-bg.png) 0px 0px;
+	width: 980px;
+	height: 72px;
+	margin: 0 auto;
+	text-align: left;
+}
+
+div#site_header_logo {
+	float: left;
+	padding: 0 2px 0 10px;
+}
+
+div#site_header_title {
+	float: left;
+}
+
+div#site_header_title h1 {
+	font-size: 28px;
+	font-weight: normal;
+	text-decoration: none;
+	color: #000000;
+	margin: 0;
+	padding: 6px 0 0 3px;
+}
+
+div#site_header_subtitle {
+	font-size: 14px;
+}
+
+div#site_header_subtitle img {
+	padding: 0 5px 0 0;
+}
+
+div#site_header_searchbox {
+	display: none;
+}
+
+div#site_header_toolbar {
+	display: none;
+}
+
+/* -- site menu -- */
+div#site_menu {
+	display: none;
+}
+
+/* -- site main -- */
+div#site_main {
+	width: 980px;
+	margin: 10px auto;
+	text-align: left;
+}
+
+div#site_main_container {
+	float: left;
+	width: 100%;
+}
+
+div#site_main_panel {
+	padding: 0 10px;
+}
+
+div#site_main_lcolumn {
+	float: left;
+	width: 50%;
+}
+
+div#site_main_rcolumn {
+	float: right;
+	width: 50%;
+}
+
+div#site_utilities_container {
+	display: none;
+}
+
+/* -- site footer -- */
+div#site_footer {
+	width: 980px;
+	margin: 0 auto;
+	text-align: left;
+	border-top: 1px solid #DDDDDD;
+}
+
+div#site_copy {
+	float: left;
+	font: 12px Arial, Helvetica, sans-serif;
+	color: #666666;
+	padding: 5px 0;
+}
+
+div#site_banner {
+	float: right;
+}
+
+div#site_banner img {
+	margin-left: 20px;
+}
+
+/* -- content & block -- */
+div.blockContainer {
+	background-color: #E8E8E8;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+div.blockTitle {
+	font-size: 1em;
+	font-weight: bold;
+	color: #000000;
+	padding: 8px 0 5px 15px;
+}
+
+div.blockContent {
+	border: solid 1px #E8E8E8;
+	padding: 5px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+div.content,
+div.blockContent {
+	background: #ffffff;
+	margin: 0 0 10px 0;
+	line-height: 1.2;
+}
+
+/* -- XOOPS news item -- */
+.item {
+	border: solid 1px #7A7ACC;
+}
+
+.itemHead {
+	background: #778899;
+	color: #FFFFFF;
+	margin: 0;
+	padding: 3px;
+}
+
+.itemInfo {
+	background: #EFEFEF;
+	text-align: right;
+	margin: 0;
+	padding: 3px;
+}
+
+.itemTitle a {
+	background: transparent;
+	color: #FFFFFF;
+	font-size: 120%;
+	font-weight: bold;
+}
+
+.itemTitle a:visited {
+	color: #3366CC;
+}
+
+.itemPoster {
+	font-size: 0.9em;
+}
+
+.itemPostDate {
+	font-size: 0.9em;
+}
+
+.itemStats {
+	font-size: 0.9em;
+}
+
+.itemBody {
+	margin: 0;
+	padding-left: 5px;
+}
+
+.itemText {
+	margin: 6px;
+	line-height: 1.5;
+}
+
+.itemFoot {
+	background: #EFEFEF;
+	text-align: right;
+	margin: 0;
+	padding: 3px;
+}
+
+.itemAdminLink {
+	font-size: 0.9em;
+}
+
+.itemPermaLink {
+	font-size: 0.9em;
+}
+
+/* -- XOOPS mainmenu -- */
+td#mainmenu a {
+	text-decoration: none;
+	margin: 0;
+	padding: 2px;
+	display: block;
+}
+
+td#mainmenu a:visited {
+	color: #3366CC;
+}
+
+
+td#mainmenu a:hover {
+	background: #E6E6E6;
+	text-decoration: none;
+}
+
+td#mainmenu a.menuTop {
+	margin: 0;
+	padding-left: 3px;
+	border-bottom: dotted 1px #7A7ACC;
+}
+
+td#mainmenu a.menuMain {
+	margin: 0;
+	padding-left: 3px;
+	border-bottom: dotted 1px #7A7ACC;
+}
+
+td#mainmenu a.menuSub {
+	margin: 0;
+	padding-left: 9px;
+	border-bottom: dotted 1px #7A7ACC;
+}
+
+/* -- XOOPS usermenu -- */
+td#usermenu a {
+	background: #FFFFFF;
+	text-decoration: none;
+	margin: 0;
+	padding: 2px;
+	border-bottom: dotted 1px #7A7ACC;
+	display: block;
+}
+
+td#usermenu a:visited {
+	color: #3366CC;
+}
+
+td#usermenu a:hover {
+	background: #E6E6E6;
+	text-decoration: none;
+}
+
+td#usermenu a.menuTop {}
+
+td#usermenu a.highlight {
+	background: #FFCCCC;
+}
+
+/* -- XOOPS table -- */
+.outer {
+	border: solid 1px #C0C0C0;
+}
+
+.head, .foot {
+	background: #C2CDD6;
+	font-weight: bold;
+	margin: 0;
+	padding: 5px;
+}
+
+.even, tr.even td {
+	background: #F2F2F2;
+	margin: 0;
+	padding: 5px;
+}
+
+.odd, tr.odd td {
+	background: #FFFFFF;
+	margin: 0;
+	padding: 5px;
+}
+
+/* -- XOOPS message -- */
+div.errorMsg {
+	background: #FFCCCC;
+	font-weight: bold;
+	text-align: center;
+	margin: 0;
+	padding: 10px;
+	border-top: solid 1px #DDDDFF;
+	border-right: solid 1px #AAAAAA;
+	border-bottom: solid 1px #AAAAAA;
+	border-left: solid 1px #DDDDFF;
+}
+
+div.confirmMsg {
+	background: #DDFFDF;
+	color: #136C99;
+	font-weight: bold;
+	text-align: center;
+	margin: 10px;
+	padding: 10px;
+	border-top: solid 1px #DDDDFF;
+	border-right: solid 1px #AAAAAA;
+	border-bottom: solid 1px #AAAAAA;
+	border-left: solid 1px #DDDDFF;
+}
+
+div.resultMsg {
+	background: #DDDDFF;
+	color: #333333;
+	font-weight: bold;
+	text-align: center;
+	margin: 10px;
+	padding: 10px;
+	border-top: solid 1px #CCCCCC;
+	border-right: solid 1px #9999CC;
+	border-bottom: solid 1px #9999CC;
+	border-left: solid 1px #CCCCCC;
+}
+
+/* -- XOOPS code -- */
+div.xoopsCode,
+div.xoopsQuote {
+	width: 98%;
+	height: 100%;
+	padding: 0;
+}
+
+div.xoopsCode pre {
+	border: solid 1px #C0C0C0;
+	margin:0;
+	overflow:auto;
+	padding:0 1em;
+	min-height:4em;
+	height:auto;
+	white-space: pre-wrap;       /* css-3 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word;       /* Internet Explorer 5.5+ */
+	background-color:#FFFFFF;
+}
+
+/* for IExplorer */
+* html div.xoopsCode pre {
+	height: 4em;
+	height: auto;    /* IE 6.x */
+	width: 40em;
+}
+
+div.xoopsQuote blockquote {
+	margin: 0;
+	padding: 0 6px 6px 6px;
+	border: solid 1px #C0C0C0;
+	background-color: #FFFFFF;
+}
+
+/* -- XOOPS comments -- */
+.comTitle {
+	font-weight: bold;
+	margin-bottom: 2px;
+}
+
+.comText {
+	margin: 0;
+	padding: 2px;
+	line-height: 1.4;
+}
+
+.comUserStat {
+	background: #F5F5F5;
+	color: #2F5376;
+	font-size: 0.8em;
+	font-weight:bold;
+	margin: 2px;
+	padding: 4px 2px 1px 4px;
+	border: solid 1px #C0C0C0;
+}
+
+.comUserStatCaption {
+	font-weight: normal;
+}
+
+.comUserRank {
+	margin: 2px;
+}
+
+.comUserRankText {
+	font-size: 0.8em;
+}
+
+.comUserRankImg {
+	border: 0;
+}
+
+.comUserName {}
+
+.comUserImg {
+	margin: 2px;
+}
+
+.comDate {
+	font-size: smaller;
+	font-weight: normal;
+}
+
+.comDateCaption {
+	font-weight: normal;
+}
+
+.comUserStatus {
+	background: #F5F5F5;
+	color: #2F5376;
+	font-size: 0.8em;
+	font-weight: bold;
+	margin: 2px;
+	padding: 4px 2px 1px 3px;
+	border: solid 1px #C0C0C0;
+}
+
+/* -- XOOPS usermenu clone -- */
+td.mymenu a {
+	background: #FFFFFF;
+	text-decoration: none;
+	margin: 0;
+	padding: 2px;
+	border-bottom: dotted 1px #7A7ACC;
+	display: block;
+}
+
+td.mymenu a:visited {
+	color: #3366CC;
+}
+
+td.mymenu a:hover {
+	background: #E6E6E6;
+	text-decoration: none;
+}
+
+td.mymenu a.menuTop {}
+
+td.mymenu a.highlight {
+	background: #FFCCCC;
+}
+
+/* -- d3forum -- */
+div.d3f_breadcrumbs {}
+
+h1.d3f_title {
+	font-size: 20px;
+	font-weight: bold;
+	padding: 5px 0 0 0;
+	margin: 5px 0 10px 0;
+}
+
+div.d3f_wrap {
+	width: auto;
+}
+
+h2.d3f_head {
+	margin: 10px 0;
+	padding: 5px 10px;
+	background: #778899;
+	color: #FFFFFF;
+}
+
+div.d3f_head h2.yetapproval {
+	color: #F5F5F5;
+	background: #778899;
+	font-weight: bold;
+}
+
+h2.d3f_tree {
+	color: #F5F5F5;
+	font-weight: bold;
+}
+
+ul.d3f_ctrl {
+	width: auto;
+	margin: 10px 0;
+	padding: 5px 2px;
+}
+
+div.d3f_order_ctrl {}
+
+div.d3f_info_ctrl {
+	border-top: 1px solid #CCCCCC;
+}
+
+/* -- XooNIps -- */
+form#xoonips_order_itemcount_form td.odd,
+form#xoonips_itemselect td.odd,
+form#xoonips_item_list_header td.odd {
+	background-color: #FFFFFF;
+}
+

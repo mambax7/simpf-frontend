@@ -1,0 +1,21 @@
+<{if $is_first}>
+<script type="text/javascript" src="<{$mod_url}>/js/jquery-1.6.1.min.js"></script>
+<script type="text/javascript" src="<{$mod_url}>/js/jquery.flatheights.js"></script>
+<script type="text/javascript">
+<!--//
+jQuery.noConflict();
+jQuery(function () {
+  jQuery('.item_thumbnail').flatHeights();
+});
+//-->
+</script>
+<{/if}>
+
+<div class="item_thumbnail">
+  <div class="item_thumbnail_screenshot"><a href="<{$item_url|escape}>"><{if $screenshot}><img src="<{$screenshot.thumbnail_url|escape}>" alt="<{$screenshot.caption|simpf_escape}>" /><{else}><img src="<{$mod_url}>/images/thumbnail-na.gif" alt="Not Available" /><{/if}></a></div>
+  <div class="item_thumbnail_metadata">
+    <div class="item_thumbnail_title"><a href="<{$item_url|escape}>"><{foreach item=title from=$basic.titles}><{$title|simpf_escape}>&nbsp;<{/foreach}></a></div>
+    <div class="item_thumbnail_date"><{$smarty.const._MD_XOONIPS_ITEM_CREATION_DATE_LABEL}><{if $is_pending}>:&nbsp;&nbsp;(Pending)<{/if}><br /><{$basic.creation_date|xoops_date_format:"%b %e, %Y %H:%M:%S"}></div>
+  </div>
+  <div class="item_thumbnail_endmark"></div>
+</div>

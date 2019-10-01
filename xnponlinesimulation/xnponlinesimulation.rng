@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!-- Online Simulation Item Type XML definition file (Relax NG) -->
+<!-- version 1.00 -->
+
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+  datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <include href="http://xoonips.sourceforge.jp/rng/basic.rng"/>
+  <include href="http://xoonips.sourceforge.jp/rng/link.rng"/>
+  <include href="http://xoonips.sourceforge.jp/rng/file.rng"/>
+  <start>
+    <element name="item">
+      <ref name="basic"/>
+      <ref name="link"/>
+      <ref name="detail"/>
+    </element>
+  </start>
+  <define name="detail">
+    <element name="detail">
+      <attribute name="id">
+        <data type="integer"/>
+      </attribute>
+      <interleave>
+        <element name="vm_type">
+          <data type="string"/>
+        </element>
+        <element name="download_url">
+          <data type="string"/>
+        </element>
+        <element name="contents_count">
+          <data type="integer"/>
+        </element>
+        <element name="model_contents_url">
+          <data type="string"/>
+        </element>
+        <element name="model_contents_count">
+          <data type="integer"/>
+        </element>
+        <element name="model_site_name">
+          <data type="string"/>
+        </element>
+        <element name="simulation_name">
+          <data type="string"/>
+        </element>
+        <element name="simulation_version">
+          <data type="string"/>
+        </element>
+        <ref name="file"/>
+      </interleave>
+    </element>
+  </define>
+</grammar>
