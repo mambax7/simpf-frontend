@@ -55,8 +55,8 @@ function xoops_module_uninstall_xnponlinesimulation($xoopsMod)
     $ret[] = 'Run uninstall script';
 
     // check xoonips module
-    $module_handler = &xoops_gethandler('module');
-    $module_obj = &$module_handler->getByDirname('xoonips');
+    $module_handler = xoops_gethandler('module');
+    $module_obj     = $module_handler->getByDirname('xoonips');
     if (!is_object($module_obj)) {
         $ret[] = '+ Warning: XooNIps not found';
 
