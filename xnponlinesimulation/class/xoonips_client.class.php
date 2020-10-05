@@ -534,7 +534,7 @@ class XooNIpsClient
         $this->_extra_errors = @unserialize($matches[2]);
         foreach ($this->_extra_errors as $err) {
             $mes = ''.$err['code'].' - ';
-            $mes .= isset($xoonips_errors[$err['code']]) ? $xoonips_errors[$err['code']] : 'unexpected error';
+            $mes .= $xoonips_errors[$err['code']] ?? 'unexpected error';
             if ('' != $err['extra']) {
                 $mes .= ' : '.$err['extra'];
             }
