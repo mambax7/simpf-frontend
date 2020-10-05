@@ -175,7 +175,7 @@ function xnponlinesimulationGetDetailBlock($item_id)
 
     // get autorun flag
     $autorun = xoops_getrequest('autorun');
-    $autorun = in_array($autorun, array('on', 'ON', '1', 'true', 'TRUE'));
+    $autorun = in_array($autorun, ['on', 'ON', '1', 'true', 'TRUE']);
 
     // get item viewed count
     $ranking_handler = &xoonips_gethandler('xoonips', 'ranking');
@@ -347,7 +347,7 @@ function xnponlinesimulationCheckRegisterParameters(&$message)
  */
 function xnponlinesimulationCheckEditParameters(&$message)
 {
-    $messages = array();
+    $messages = [];
     $formdata = &xoonips_getutility('formdata');
     // model contents url
     $model_contents_url = $formdata->getValue('post', 'model_contents_url', 's', false);
@@ -394,7 +394,7 @@ function xnponlinesimulationGetConfirmBlock($item_id)
     $detail = xnponlinesimulationGetDetailInformation($item_id);
     $detail = _xnponlinesimulationFetchDetailInformation($detail);
     foreach (array_keys($detail) as $key) {
-        $detail[$key] = array('value' => $detail[$key]);
+        $detail[$key] = ['value' => $detail[$key]];
     }
     xnpConfirmHtml($detail, $mydirname.'_item_detail', null, _CHARSET);
 
@@ -444,8 +444,8 @@ function xnponlinesimulationInsertItem(&$item_id)
     $detail = xnponlinesimulationGetDetailInformation($item_id);
     $detail = _xnponlinesimulationFetchDetailInformation($detail);
     // sanitize url
-    $replace = array('/javascript:/i', '/[\\x00-\\x1f]/');
-    foreach (array('vm_type', 'download_url', 'model_contents_url') as $key) {
+    $replace = ['/javascript:/i', '/[\\x00-\\x1f]/'];
+    foreach (['vm_type', 'download_url', 'model_contents_url'] as $key) {
         $detail[$key] = trim(preg_replace($replace, '', $detail[$key]));
     }
     // trim oversized data
@@ -512,17 +512,17 @@ function xnponlinesimulationUpdateItem($item_id)
  */
 function xnponlinesimulationGetModifiedFields($item_id)
 {
-    $ret = array();
+    $ret = [];
     $detail_old = xnponlinesimulationGetDetailInformation($item_id);
     $detail_new = _xnponlinesimulationFetchDetailInformation($detail_old);
-    $fields = array(
+    $fields = [
         'vm_type' => _MD_XNPONLINESIMULATION_VM_TYPE,
         'download_url' => _MD_XNPONLINESIMULATION_DOWNLOAD_URL,
         'model_contents_url' => _MD_XNPONLINESIMULATION_MODEL_CONTENTS_URL,
         'model_site_name' => _MD_XNPONLINESIMULATION_MODEL_SITE_NAME,
         'simulator_name' => _MD_XNPONLINESIMULATION_SIMULATOR_NAME,
         'simulator_version' => _MD_XNPONLINESIMULATION_SIMULATOR_VERSION,
-    );
+    ];
     foreach ($fields as $key => $label) {
         if ($detail_old[$key] != $detail_new[$key]) {
             array_push($ret, $label);
@@ -545,11 +545,11 @@ function xnponlinesimulationGetDetailInformationQuickSearchQuery(&$wheres, &$joi
     $mydirname = basename(dirname(dirname(__FILE__)));
     global $xoopsDB;
     $detail_table = $xoopsDB->prefix($mydirname.'_item_detail');
-    $keyword_fields = array(
+    $keyword_fields = [
         sprintf('%s.model_site_name', $detail_table),
         sprintf('%s.simulator_name', $detail_table),
         sprintf('%s.simulator_version', $detail_table),
-    );
+    ];
     $wheres = xnpGetKeywordsQueries($keyword_fields, $keywords);
 
     return true;
@@ -569,7 +569,7 @@ function xnponlinesimulationGetAdvancedSearchBlock(&$search_vars)
     $mod_url = XOOPS_URL.'/modules/'.$mydirname;
     // search variables
     $basic = xnpGetBasicInformationAdvancedSearchBlock($mydirname, $search_vars);
-    $keys = array('vm_type', 'download_url', 'model_contents_url', 'model_site_name', 'simulator_name', 'simulator_version');
+    $keys = ['vm_type', 'download_url', 'model_contents_url', 'model_site_name', 'simulator_name', 'simulator_version'];
     foreach ($keys as $key) {
         $search_vars[] = sprintf('%s_%s', $mydirname, $key);
     }
@@ -603,14 +603,14 @@ function xnponlinesimulationGetAdvancedSearchQuery(&$where, &$join)
     $mydirname = basename(dirname(dirname(__FILE__)));
     global $xoopsDB;
     $detail_table = $xoopsDB->prefix($mydirname.'_item_detail');
-    $wheres = array();
+    $wheres = [];
     // basic
     $w = xnpGetBasicInformationAdvancedSearchQuery($mydirname);
     if ($w) {
         $wheres[] = $w;
     }
     // detail
-    $keys = array('simulator_name', 'simulator_version', 'vm_type', 'download_url', 'model_contents_url', 'model_site_name');
+    $keys = ['simulator_name', 'simulator_version', 'vm_type', 'download_url', 'model_contents_url', 'model_site_name'];
     foreach ($keys as $key) {
         $field = sprintf('%s.%s', $detail_table, $key);
         $name = sprintf('%s_%s', $mydirname, $key);
@@ -713,7 +713,7 @@ function xnponlinesimulationGetDetailInformationTotalSize($iids)
  */
 function xnponlinesimulationGetMetaInformation($item_id)
 {
-    $ret = array();
+    $ret = [];
     $basic = xnpGetBasicInformationArray($item_id);
     $detail = xnponlinesimulationGetDetailInformation($item_id);
     $ret[_MD_XOONIPS_ITEM_DOI_LABEL] = $basic['doi'];
@@ -743,7 +743,7 @@ function xnponlinesimulationGetMetaInformation($item_id)
  */
 function xnponlinesimulationSupportMetadataFormat($prefix, $item_id)
 {
-    static $schemes = array('oai_dc', 'junii2');
+    static $schemes = ['oai_dc', 'junii2'];
 
     return in_array($prefix, $schemes);
 }
@@ -760,7 +760,7 @@ function xnponlinesimulationGetMetadata($prefix, $item_id)
 {
     $mydirpath = dirname(dirname(__FILE__));
     $mydirname = basename($mydirpath);
-    if (!in_array($prefix, array('oai_dc', 'junii2'))) {
+    if (!in_array($prefix, ['oai_dc', 'junii2'])) {
         return false;
     }
 
@@ -775,7 +775,7 @@ function xnponlinesimulationGetMetadata($prefix, $item_id)
     $basic = xnpGetBasicInformationArray($item_id);
     $basic['publication_date_iso8601'] = xnpISO8601($basic['publication_year'], $basic['publication_month'], $basic['publication_mday']);
     // indexes
-    $indexes = array();
+    $indexes = [];
     if (RES_OK == xnp_get_index_id_by_item_id($_SESSION['XNPSID'], $item_id, $xids)) {
         foreach ($xids as $xid) {
             if (RES_OK == xnp_get_index($_SESSION['XNPSID'], $xid, $index)) {
@@ -789,23 +789,23 @@ function xnponlinesimulationGetMetadata($prefix, $item_id)
     // related to
     $related_to_handler = &xoonips_getormhandler('xoonips', 'related_to');
     $related_to_ids = $related_to_handler->getChildItemIds($item_id);
-    $related_tos = array();
+    $related_tos = [];
     foreach ($related_to_ids as $related_to_id) {
-        $related_tos[] = array(
+        $related_tos[] = [
         'item_id' => $related_to_id,
         'item_url' => XOOPS_URL.'/modules/xoonips/detail.php?item_id='.$related_to_id,
-        );
+        ];
     }
     // repository configs
     $xconfig_handler = &xoonips_getormhandler('xoonips', 'config');
     $myxoopsConfigMetaFooter = &xoonips_get_xoops_configs(XOOPS_CONF_METAFOOTER);
-    $repository = array(
+    $repository = [
         'download_file_compression' => $xconfig_handler->getValue('download_file_compression'),
         'nijc_code' => $xconfig_handler->getValue('repository_nijc_code'),
         'publisher' => $xconfig_handler->getValue('repository_publisher'),
         'institution' => $xconfig_handler->getValue('repository_institution'),
         'meta_author' => $myxoopsConfigMetaFooter['meta_author'],
-    );
+    ];
     // assign template
     global $xoopsTpl;
     $tpl = new XoopsTpl();
@@ -879,12 +879,12 @@ function _xnponlinesimulationGetScreenshotInformation($item_id)
     $url = sprintf('%s/image.php?file_id=%u', XOONIPS_URL, $file_id);
     $thumbnail_url = $url.'&thumbnail=1';
 
-    return array(
+    return [
         'file_id' => $file_id,
         'caption' => $caption,
         'url' => $url,
         'thumbnail_url' => $thumbnail_url,
-    );
+    ];
 }
 
 /**
@@ -915,11 +915,11 @@ function _xnponlinesimulationFetchDetailInformation($detail)
  */
 function _xnponlinesimulationGetVmTypes()
 {
-    static $vmTypes = array(
+    static $vmTypes = [
         'centos5' => 'centos5',
         'neurodebian6' => 'neurodebian6',
         'win2008r2' => 'win2008r2',
-    );
+    ];
 
     return $vmTypes;
 }

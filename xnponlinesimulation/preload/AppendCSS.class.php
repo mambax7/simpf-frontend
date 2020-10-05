@@ -4,7 +4,7 @@ class Xnponlinesimulation_AppendCSS extends XCube_ActionFilter
 {
     public function preBlockFilter()
     {
-        $this->mRoot->mDelegateManager->add('XoopsTpl.New', array($this, 'appendCSS'));
+        $this->mRoot->mDelegateManager->add('XoopsTpl.New', [$this, 'appendCSS']);
     }
 
     /**

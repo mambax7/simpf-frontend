@@ -48,7 +48,7 @@ function xoops_module_uninstall_xnponlinesimulation($xoopsMod)
         $root->mDelegateManager->add('Legacy.Admin.Event.ModuleUninstall.'.ucfirst($mydirname).'.Fail', $mydirname.'_message_append_onuninstall');
     }
     if (!isset($ret) || !is_array($ret)) {
-        $ret = array();
+        $ret = [];
     }
 
     // greeting
@@ -77,7 +77,7 @@ function xoops_module_uninstall_xnponlinesimulation($xoopsMod)
     }
     $item_type_id = 0;
     while ($row = $xoopsDB->fetchRow($res)) {
-        list($item_type_id, $item_type_name) = $row;
+        [$item_type_id, $item_type_name] = $row;
     }
     $xoopsDB->freeRecordSet($res);
     if (0 == $item_type_id) {
@@ -88,16 +88,16 @@ function xoops_module_uninstall_xnponlinesimulation($xoopsMod)
 
     // unregister XooNIps item type
     $ret[] = '+ Unregister XooNIps item type : '.$item_type_name;
-    $table_maps = array(
-        'xoonips_changelog' => array('item_id'),
-        'xoonips_index_item_link' => array('item_id'),
-        'xoonips_item_keyword' => array('item_id'),
-        'xoonips_item_lock' => array('item_id'),
-        'xoonips_item_show' => array('item_id'),
-        'xoonips_item_title' => array('item_id'),
-        'xoonips_related_to' => array('parent_id', 'item_id'),
-        'xoonips_transfer_request' => array('item_id'),
-    );
+    $table_maps = [
+        'xoonips_changelog'        => ['item_id'],
+        'xoonips_index_item_link'  => ['item_id'],
+        'xoonips_item_keyword'     => ['item_id'],
+        'xoonips_item_lock'        => ['item_id'],
+        'xoonips_item_show'        => ['item_id'],
+        'xoonips_item_title'       => ['item_id'],
+        'xoonips_related_to'       => ['parent_id', 'item_id'],
+        'xoonips_transfer_request' => ['item_id'],
+    ];
     foreach ($table_maps as $table_name => $keys) {
         $table = $xoopsDB->prefix($table_name);
         foreach ($keys as $key) {

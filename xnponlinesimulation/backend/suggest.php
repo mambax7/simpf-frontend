@@ -40,7 +40,7 @@ if (!defined('XOONIPS_PATH')) {
     exit();
 }
 
-$types = array('model_site_name', 'simulator_name', 'simulator_version');
+$types = ['model_site_name', 'simulator_name', 'simulator_version'];
 $minCount = 1; // minimum number of counts
 
 $q = xoops_getrequest('q');
@@ -70,7 +70,7 @@ $criteria->setSort('cnt', 'DESC');
 $field = sprintf('%s, COUNT(1) AS `cnt`', $t);
 $distinct = false;
 
-$ret = array();
+$ret = [];
 $res = &$detail_handler->open($criteria, $field, $distinct, $join);
 while ($obj = &$detail_handler->getNext($res)) {
     $ret[] = $obj->get($t);

@@ -110,7 +110,7 @@ class XNPOnlinesimulationImportItemHandler extends XooNIpsImportItemHandler
     /**
      * array of supported version of import file.
      */
-    public $_import_file_version = array('1.00');
+    public $_import_file_version = ['1.00'];
 
     /**
      * version string of detail information.
@@ -218,7 +218,7 @@ class XNPOnlinesimulationImportItemHandler extends XooNIpsImportItemHandler
         $tags = implode('/', $this->_tag_stack);
         switch ($tags) {
         case 'ITEM/DETAIL':
-            $requires = array('vm_type', 'download_url', 'contents_count', 'model_contents_url', 'model_contents_count', 'model_site_name');
+            $requires = ['vm_type', 'download_url', 'contents_count', 'model_contents_url', 'model_contents_count', 'model_site_name'];
             foreach ($requires as $key) {
                 if (is_null($detail->get($key, 'n'))) {
                     $this->_import_item->setErrors(E_XOONIPS_TAG_NOT_FOUND, ' no '.$key.' '.$this->_get_parser_error_at());
@@ -348,7 +348,7 @@ class XNPOnlinesimulationImportItemHandler extends XooNIpsImportItemHandler
             // copy attachment file
             if ($item->hasPreview()) {
                 $file_handler = &xoonips_getormhandler('xoonips', 'file');
-                $previews = array();
+                $previews = [];
                 foreach ($item->getVar('preview') as $preview) {
                     $clonefile = &$file_handler->fileClone($preview);
                     $clonefile->setDirty();
@@ -372,7 +372,7 @@ class XNPOnlinesimulationImportItemHandler extends XooNIpsImportItemHandler
         $text = parent::getImportLog($item);
         $detail = &$item->getVar('detail');
         foreach ($detail->getArray() as $key => $value) {
-            $value = str_replace(array("\n", '\\'), array('\\n', '\\\\'), $value);
+            $value = str_replace(["\n", '\\'], ['\\n', '\\\\'], $value);
             $text .= "\n".sprintf('detail.%s %s', $key, $value);
         }
 

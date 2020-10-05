@@ -104,13 +104,13 @@ class XNPOnlinesimulationCompoHandler extends XooNIpsItemInfoCompoHandler
     {
         include_once XOONIPS_PATH.'/include/AL.php';
         include_once dirname(dirname(__FILE__)).'/include/view.php';
-        $result = array();
+        $result = [];
         switch ($type) {
         case XOONIPS_TEMPLATE_TYPE_TRANSFER_ITEM_DETAIL:
             $result['html'] = xnponlinesimulationGetPrinterFriendlyDetailBlock($item_id);
             break;
         case XOONIPS_TEMPLATE_TYPE_TRANSFER_ITEM_LIST:
-            $basic = array();
+            $basic = [];
             if (RES_OK == xnp_get_item($_SESSION['XNPSID'], $item_id, $basic)) {
                 $result['html'] = xnponlinesimulationGetPrinterFriendlyListBlock($basic);
             }
@@ -119,7 +119,7 @@ class XNPOnlinesimulationCompoHandler extends XooNIpsItemInfoCompoHandler
             $result['html'] = xnponlinesimulationGetDetailBlock($item_id);
             break;
         case XOONIPS_TEMPLATE_TYPE_ITEM_LIST:
-            $basic = array();
+            $basic = [];
             if (RES_OK == xnp_get_item($_SESSION['XNPSID'], $item_id, $basic)) {
                 $result['html'] = xnponlinesimulationGetListBlock($basic);
             }

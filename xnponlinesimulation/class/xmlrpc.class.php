@@ -52,7 +52,7 @@ class XMLRPC_Utility
      *
      * @var array strings of html character entity reference
      */
-    public $_html_char_entity_ref = array(
+    public $_html_char_entity_ref = [
         '&quot;',     '&amp;',      '&apos;',     '&lt;',       '&gt;',
         '&nbsp;',     '&iexcl;',    '&cent;',     '&pound;',    '&curren;',
         '&yen;',      '&brvbar;',   '&sect;',     '&uml;',      '&copy;',
@@ -104,14 +104,14 @@ class XMLRPC_Utility
         '&perp;',     '&sdot;',     '&lceil;',    '&rceil;',    '&lfloor;',
         '&rfloor;',   '&lang;',     '&rang;',     '&loz;',      '&spades;',
         '&clubs;',    '&hearts;',   '&diams;',
-    );
+    ];
 
     /**
      * html numeric character references.
      *
      * @var array strings of html numeric character reference
      */
-    public $_html_numeric_char_ref = array(
+    public $_html_numeric_char_ref = [
         '&#34;',   '&#38;',   '&#39;',   '&#60;',   '&#62;',
         '&#160;',  '&#161;',  '&#162;',  '&#163;',  '&#164;',
         '&#165;',  '&#166;',  '&#167;',  '&#168;',  '&#169;',
@@ -163,7 +163,7 @@ class XMLRPC_Utility
         '&#8869;', '&#8901;', '&#8968;', '&#8969;', '&#8970;',
         '&#8971;', '&#9001;', '&#9002;', '&#9674;', '&#9824;',
         '&#9827;', '&#9829;', '&#9830;',
-    );
+    ];
 
     /**
      * constructor.
@@ -197,7 +197,7 @@ class XMLRPC_Utility
      */
     public function get_value_type($name)
     {
-        static $types = array(
+        static $types = [
             'array' => XMLRPC_VALUE_TYPE_ARRAY,
             'base64' => XMLRPC_VALUE_TYPE_BASE64,
             'boolean' => XMLRPC_VALUE_TYPE_BOOLEAN,
@@ -208,7 +208,7 @@ class XMLRPC_Utility
             'string' => XMLRPC_VALUE_TYPE_STRING,
             'struct' => XMLRPC_VALUE_TYPE_STRUCT,
             'nil' => XMLRPC_VALUE_TYPE_NIL,
-        );
+        ];
 
         return $types[$name];
     }
@@ -220,7 +220,7 @@ class XMLRPC_Utility
      */
     public function get_tag_name($value)
     {
-        static $names = array(
+        static $names = [
             XMLRPC_VALUE_TYPE_ARRAY => 'array',
             XMLRPC_VALUE_TYPE_BASE64 => 'base64',
             XMLRPC_VALUE_TYPE_BOOLEAN => 'boolean',
@@ -230,7 +230,7 @@ class XMLRPC_Utility
             XMLRPC_VALUE_TYPE_STRING => 'string',
             XMLRPC_VALUE_TYPE_STRUCT => 'struct',
             XMLRPC_VALUE_TYPE_NIL => 'nil',
-        );
+        ];
 
         return $names[$value];
     }
@@ -304,8 +304,8 @@ class XMLRPC_Utility
      */
     public function encode_string($value)
     {
-        static $search = array('&', '\'', '"', '<', '>');
-        static $replace = array('&amp;', '&apos;', '&quot;', '&lt;', '&gt;');
+        static $search = ['&', '\'', '"', '<', '>'];
+        static $replace = ['&amp;', '&apos;', '&quot;', '&lt;', '&gt;'];
 
         return str_replace($search, $replace, $value);
     }
@@ -330,7 +330,7 @@ class XMLRPC_Utility
         );
         $value = preg_replace('/&amp;#([0-9]+);/', '&#$1;', $value);
         // decode numeric entity
-        $value = mb_decode_numericentity($value, array(0x0, 0x10000, 0, 0xfffff), 'UTF-8');
+        $value = mb_decode_numericentity($value, [0x0, 0x10000, 0, 0xfffff], 'UTF-8');
         // convert '&amp;' to '&'
         $value = str_replace('&amp;', '&', $value);
 
@@ -547,7 +547,7 @@ class XMLRPC_Response
      */
     public function __construct()
     {
-        $this->_errors = array();
+        $this->_errors = [];
         $this->_param = false;
         $this->_fault_code = 0;
         $this->_fault_string = '';
@@ -621,10 +621,10 @@ class XMLRPC_Response
         $xml = '<?xml version="1.0"?>'."\n";
         $xml .= '<methodResponse>';
         if ($this->isFault()) {
-            $val = array(
+            $val = [
                 'faultCode' => new XMLRPC_Value(XMLRPC_VALUE_TYPE_INTEGER, $this->_fault_code),
                 'faultString' => new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_fault_string),
-            );
+            ];
             $obj = new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRUCT, $val);
             $xml .= '<fault>';
             $xml .= $obj->renderXML();
@@ -848,11 +848,11 @@ class XMLRPC_Response
      */
     public function _condition_initialize()
     {
-        $this->_condition = array();
-        $this->_condition['values'] = array();
-        $this->_condition['arrays'] = array();
-        $this->_condition['cdata'] = array('');
-        $this->_condition['names'] = array('');
+        $this->_condition = [];
+        $this->_condition['values'] = [];
+        $this->_condition['arrays'] = [];
+        $this->_condition['cdata'] = [''];
+        $this->_condition['names'] = [''];
     }
 
     /**
@@ -866,25 +866,25 @@ class XMLRPC_Response
      */
     public function _condition_check_xml($parser, $pname, $name)
     {
-        static $xml_struct = array(
-            'methodResponse' => array(''),
-            'params' => array('methodResponse'),
-            'fault' => array('methodResponse'),
-            'param' => array('params'),
-            'value' => array('param', 'data', 'member', 'fault'),
-            'array' => array('value'),
-            'base64' => array('value'),
-            'boolean' => array('value'),
-            'dateTime.iso8601' => array('value'),
-            'double' => array('value'),
-            'i4' => array('value'),
-            'int' => array('value'),
-            'string' => array('value'),
-            'struct' => array('value'),
-            'data' => array('array'),
-            'member' => array('struct'),
-            'name' => array('member'),
-        );
+        static $xml_struct = [
+            'methodResponse' => [''],
+            'params' => ['methodResponse'],
+            'fault' => ['methodResponse'],
+            'param' => ['params'],
+            'value' => ['param', 'data', 'member', 'fault'],
+            'array' => ['value'],
+            'base64' => ['value'],
+            'boolean' => ['value'],
+            'dateTime.iso8601' => ['value'],
+            'double' => ['value'],
+            'i4' => ['value'],
+            'int' => ['value'],
+            'string' => ['value'],
+            'struct' => ['value'],
+            'data' => ['array'],
+            'member' => ['struct'],
+            'name' => ['member'],
+        ];
         // check known name name
         if (!isset($xml_struct[$name])) {
             $msg = 'Unknown tag "'.$name.'" found under "'.$pname.'"';
@@ -999,10 +999,10 @@ class XMLRPC_Response
      */
     public function _condition_push_array()
     {
-        $struct = array(
+        $struct = [
             'name' => null,
-            'values' => array(),
-        );
+            'values' => [],
+        ];
         array_unshift($this->_condition['arrays'], $struct);
     }
 
@@ -1110,7 +1110,7 @@ class XMLRPC_Client
      *
      * @var array
      */
-    public $_errors = array();
+    public $_errors = [];
 
     /**
      * flag for using http authentication.
@@ -1286,7 +1286,7 @@ class XMLRPC_Client
     public function &sendMessage(&$method)
     {
         $ret = false;
-        $this->_errors = array();
+        $this->_errors = [];
         if ('' == $this->_host) {
             $this->_errors[] = 'invalid uri string : '.$this->_uri;
 

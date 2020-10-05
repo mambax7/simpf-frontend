@@ -6,7 +6,7 @@ class XooNIpsClient
     public $_session;
     public $_fault_code = 0;
     public $_fault_string = '';
-    public $_extra_errors = array();
+    public $_extra_errors = [];
 
     public function __construct($uri)
     {
@@ -18,11 +18,11 @@ class XooNIpsClient
     {
         switch ($name) {
         case 'http_auth':
-              list($user, $pass, $auth) = $value;
+              [$user, $pass, $auth] = $value;
               $this->_client->setAuthentication($user, $pass, $auth);
             break;
         case 'proxy':
-              list($host, $port, $uname, $pass, $auth) = $value;
+              [$host, $port, $uname, $pass, $auth] = $value;
               $this->_client->setProxy($host, $port, $uname, $pass, $auth);
             break;
         case 'user_agent':
@@ -40,10 +40,10 @@ class XooNIpsClient
 
     public function login($user, $pass)
     {
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $user),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $pass),
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.login', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -57,9 +57,9 @@ class XooNIpsClient
 
     public function logout()
     {
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.logout', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -79,11 +79,11 @@ class XooNIpsClient
 
     public function &getItem($id, $id_type = 'item_id')
     {
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $id),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $id_type),
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.getItem', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -99,15 +99,15 @@ class XooNIpsClient
 
     public function &getSimpleItems($ids, $id_type = 'item_id')
     {
-        $ids_array = array();
+        $ids_array = [];
         foreach ($ids as $id) {
             $ids_array[] = new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $id);
         }
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_ARRAY, $ids_array),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $id_type),
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.getSimpleItems', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -123,11 +123,11 @@ class XooNIpsClient
 
     public function putItem(&$item_obj, &$files_obj)
     {
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
             $item_obj,
             $files_obj,
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.updateItem', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -141,10 +141,10 @@ class XooNIpsClient
 
     public function updateItem(&$item_obj)
     {
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
             $item_obj,
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.updateItem', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -158,11 +158,11 @@ class XooNIpsClient
 
     public function removeItem($id, $id_type = 'item_id')
     {
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $id),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $id_type),
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.removeItem', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -176,11 +176,11 @@ class XooNIpsClient
 
     public function &getFile($file_id, $agreement)
     {
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_INTEGER, $file_id),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_BOOLEAN, $agreement),
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.getFile', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -196,13 +196,13 @@ class XooNIpsClient
 
     public function updateFile($id, $id_type, $field_name, &$file_obj)
     {
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $id),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $id_type),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $field_name),
             $file_obj,
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.updateFile', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -216,10 +216,10 @@ class XooNIpsClient
 
     public function removeFile($file_id)
     {
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_INTEGER, $file_id),
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.removeFile', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -233,10 +233,10 @@ class XooNIpsClient
 
     public function &getRootIndex($open_level)
     {
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $open_level),
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.getRootIndex', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -252,10 +252,10 @@ class XooNIpsClient
 
     public function &getIndex($index_id)
     {
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_INTEGER, $index_id),
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.getIndex', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -271,10 +271,10 @@ class XooNIpsClient
 
     public function &getChildIndexes($index_id)
     {
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_INTEGER, $index_id),
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.getChildIndex', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -290,14 +290,14 @@ class XooNIpsClient
 
     public function &searchItem($query, $start = 0, $limit = 20, $sort = 'title', $order = 'asc')
     {
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $query),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_INTEGER, $start),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_INTEGER, $limit),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $sort),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $order),
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.searchItem', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -313,9 +313,9 @@ class XooNIpsClient
 
     public function &getItemtypes()
     {
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.getItemtypes', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -331,10 +331,10 @@ class XooNIpsClient
 
     public function &getItemtype($itemtype_id)
     {
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_INTEGER, $itemtype_id),
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.getItemtype', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -350,9 +350,9 @@ class XooNIpsClient
 
     public function &getPreference()
     {
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.getPreference', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -368,16 +368,16 @@ class XooNIpsClient
 
     public function updateItem2(&$item_obj, &$file_obj, $delete_item_ids)
     {
-        $item_ids = array();
+        $item_ids = [];
         foreach ($delete_item_ids as $item_id) {
             $item_ids[] = new XMLRPC_Value(XMLRPC_VALUE_TYPE_INTEGER, $item_id);
         }
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
             $item_obj,
             $file_obj,
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_ARRAY, $item_ids),
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.updateItem2', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -391,10 +391,10 @@ class XooNIpsClient
 
     public function &getFileMetadata($file_id)
     {
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_INTEGER, $file_id),
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.getFileMetadata', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -410,14 +410,14 @@ class XooNIpsClient
 
     public function &getIndexPathNames($index_ids)
     {
-        $xids = array();
+        $xids = [];
         foreach ($index_ids as $index_id) {
             $xids[] = new XMLRPC_Value(XMLRPC_VALUE_TYPE_INTEGER, $index_id);
         }
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_ARRAY, $xids),
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.getIndexPathNames', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -433,11 +433,11 @@ class XooNIpsClient
 
     public function &getItemPermission($id, $id_type)
     {
-        $params = array(
+        $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $id),
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $id_type),
-        );
+        ];
         $method = new XMLRPC_Method('XooNIps.getItemPermission', $params);
         $res = &$this->_send($method);
         if (false === $res) {
@@ -465,7 +465,7 @@ class XooNIpsClient
     {
         $this->_fault_code = 0;
         $this->_fault_string = '';
-        $this->_extra_errors = array();
+        $this->_extra_errors = [];
         $falsevar = false;
         $res = $this->_client->sendMessage($method);
         if (false === $res) {
@@ -495,13 +495,13 @@ class XooNIpsClient
         $ret = null;
         switch ($type) {
         case XMLRPC_VALUE_TYPE_ARRAY:
-              $ret = array();
+              $ret = [];
             foreach ($value as $tmp) {
                 $ret[] = &$this->_decode_value($tmp);
             }
             break;
         case XMLRPC_VALUE_TYPE_STRUCT:
-              $ret = array();
+              $ret = [];
             foreach ($value as $name => $tmp) {
                 $ret[$name] = &$this->_decode_value($tmp);
             }
@@ -515,7 +515,7 @@ class XooNIpsClient
 
     public function _set_xoonips_error($str)
     {
-        $xoonips_errors = array(
+        $xoonips_errors = [
             100 => 'uncategolized error',
             101 => 'invalid session',
             102 => 'failed to login',
@@ -526,7 +526,7 @@ class XooNIpsClient
             107 => 'too meny arguments',
             108 => 'invalid argument type',
             109 => 'internal server error',
-        );
+        ];
         if (!preg_match("/^(Method response error)\n(.*)/", $str, $matches)) {
             return false;
         }

@@ -107,7 +107,7 @@ if (!$is_error) {
     }
 }
 
-$data = array();
+$data = [];
 if ($is_error) {
     $data['error'] = $error_message;
 } else {
@@ -178,14 +178,14 @@ function getXooNIpsItemInformation($url, &$errmes)
     $uri = sprintf('%s://%s%s%s', $purl['scheme'], $purl['host'], $port, $path);
 
     // get proxy information of XooNIps
-    $proxy_configs = array('proxy_host', 'proxy_port', 'proxy_user', 'proxy_pass');
+    $proxy_configs = ['proxy_host', 'proxy_port', 'proxy_user', 'proxy_pass'];
     $config_handler = &xoonips_getormhandler('xoonips', 'config');
     $criteria = new CriteriaCompo();
     foreach ($proxy_configs as $config) {
         $criteria->add(new Criteria('name', $config), 'OR');
     }
     $objs = &$config_handler->getObjects($criteria);
-    $proxy = array();
+    $proxy = [];
     foreach ($objs as $obj) {
         $key = $obj->getVar('name', 'n');
         $value = $obj->getVar('value', 'n');
@@ -198,13 +198,13 @@ function getXooNIpsItemInformation($url, &$errmes)
 
     // set proxy
     if ('' != $proxy['proxy_host']) {
-        $param = array(
+        $param = [
             $proxy['proxy_host'],
             $proxy['proxy_port'],
             $proxy['proxy_user'],
             $proxy['proxy_pass'],
             ('' == $proxy['proxy_user'] ? '' : 'basic'),
-        );
+        ];
         $c->setCondition('proxy', $param);
     }
 
@@ -233,9 +233,9 @@ function getXooNIpsItemInformation($url, &$errmes)
     }
 
     // normalize item type specific information
-    $ret = array();
+    $ret = [];
     $ret['site_name'] = '';
-    $site_names = array(
+    $site_names = [
         'visiome.neuroinf.jp' => 'Visiome Platform',
         'bmi.neuroinf.jp' => 'BMI Platform',
         'ivb.neuroinf.jp' => 'Invertebrate Brain Platform',
@@ -244,7 +244,7 @@ function getXooNIpsItemInformation($url, &$errmes)
         'nimg.neuroinf.jp' => 'Neuro-Imaging Platform',
         'dynamicbrain.neuroinf.jp' => 'Dynamic Brain Platform',
         'sim.neuroinf.jp' => 'Simulation Platform',
-    );
+    ];
     if (isset($site_names[$purl['host']])) {
         $ret['site_name'] = $site_names[$purl['host']];
     }
@@ -260,25 +260,25 @@ function getXooNIpsItemInformation($url, &$errmes)
     $ret['last_modified_date'] = trim($item['last_modified_date']);
     $ret['registration_date'] = trim($item['registration_date']);
     $ret['title'] = trim(implode(' ', $item['titles']));
-    $ret['author'] = array();
+    $ret['author'] = [];
     $ret['keywords'] = array_map('trim', $item['keywords']);
     $ret['rights'] = '';
     $ret['description'] = trim($item['comment']);
     $ret['readme'] = '';
     $ret['simulator'] = '';
-    $cc = array(
+    $cc = [
         'use_cc' => 0,
         'cc_commercial_use' => 0,
         'cc_modification' => 0,
-    );
-    $simulators = array(
+    ];
+    $simulators = [
         'matlab' => 'MATLAB',
         'neuron' => 'Neuron',
         'satellite' => 'SATELLITE',
         'genesis' => 'Genesis',
         'a_cell' => 'A-Cell',
         'mathematica' => 'Mathematica',
-    );
+    ];
     foreach ($item['detail_field'] as $detail) {
         $name = $detail['name'];
         $value = trim($detail['value']);

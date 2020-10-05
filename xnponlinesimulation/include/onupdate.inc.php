@@ -49,7 +49,7 @@ function xoops_module_update_xnponlinesimulation($xoopsMod, $oldversion)
         $root->mDelegateManager->add('Legacy.Admin.Event.ModuleUpdate.'.ucfirst($mydirname).'.Fail', $mydirname.'_message_append_onupdate');
     }
     if (!isset($ret) || !is_array($ret)) {
-        $ret = array();
+        $ret = [];
     }
 
     // greetings

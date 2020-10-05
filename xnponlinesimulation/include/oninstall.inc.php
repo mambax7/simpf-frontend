@@ -42,11 +42,11 @@ function xoops_module_install_xnponlinesimulation($xoopsMod)
 
     $required_version = 3.49;
 
-    $item_type_info = array(
+    $item_type_info = [
         'name' => $mydirname,
         'display_name' => 'Online Simulation',
         'viewphp' => $mydirname.'/include/view.php',
-    );
+    ];
 
     // for Cube 2.1
     global $ret;
@@ -56,7 +56,7 @@ function xoops_module_install_xnponlinesimulation($xoopsMod)
         $root->mDelegateManager->add('Legacy.Admin.Event.ModuleInstall.'.ucfirst($mydirname).'.Fail', $mydirname.'_message_append_oninstall');
     }
     if (!isset($ret) || !is_array($ret)) {
-        $ret = array();
+        $ret = [];
     }
 
     // greetings

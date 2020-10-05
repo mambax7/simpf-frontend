@@ -139,7 +139,7 @@ class Xnponlinesimulation_xnponlinesimulationRelated extends Legacy_BlockProcedu
     private function _getRelatedItems()
     {
         if (false === $this->item_id) {
-            return array();
+            return [];
         }
         include_once XOONIPS_PATH.'/include/lib.php';
         $basic_info = xnpGetBasicInformationArray($this->item_id);

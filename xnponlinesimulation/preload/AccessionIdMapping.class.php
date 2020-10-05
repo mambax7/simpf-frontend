@@ -79,7 +79,7 @@ class Xnponlinesimulation_AccessionIdMapping extends XCube_ActionFilter
             self::error404();
         }
         $redirect = xoops_getrequest('redirect');
-        $redirect = in_array($redirect, array('true', 'on', 'TRUE', 'ON', '1')) ? true : false;
+        $redirect = in_array($redirect, ['true', 'on', 'TRUE', 'ON', '1']) ? true : false;
 
         if (preg_match('/^http:/', $url)) {
             $url_http = $url;
