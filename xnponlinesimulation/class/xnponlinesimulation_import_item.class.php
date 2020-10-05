@@ -155,7 +155,7 @@ class XNPOnlinesimulationImportItemHandler extends XooNIpsImportItemHandler
      *
      * @parem resource $parser parser resource
      *
-     * @param string $name   element name
+     * @param string $name element name
      * @param array  $attrib attributes
      */
     public function xmlStartElementHandler($parser, $name, $attribs)
@@ -220,7 +220,7 @@ class XNPOnlinesimulationImportItemHandler extends XooNIpsImportItemHandler
         case 'ITEM/DETAIL':
             $requires = ['vm_type', 'download_url', 'contents_count', 'model_contents_url', 'model_contents_count', 'model_site_name'];
             foreach ($requires as $key) {
-                if (is_null($detail->get($key, 'n'))) {
+                if (null === $detail->get($key, 'n')) {
                     $this->_import_item->setErrors(E_XOONIPS_TAG_NOT_FOUND, ' no '.$key.' '.$this->_get_parser_error_at());
                 }
             }

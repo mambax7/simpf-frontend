@@ -1038,7 +1038,7 @@ class XMLRPC_Response
     public function _condition_append_array(&$obj)
     {
         $struct = &$this->_condition['arrays'][0];
-        if (!is_null($struct['name'])) {
+        if (null !== $struct['name']) {
             // struct
             $struct['values'][$struct['name']] = &$obj;
             $struct['name'] = null;

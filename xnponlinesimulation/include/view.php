@@ -112,7 +112,7 @@ function xnponlinesimulationGetListBlock($basic)
     $item_url = _xnponlinesimulationGetItemUrl($item_id, $doi);
     $screenshot = _xnponlinesimulationGetScreenshotInformation($item_id);
     static $is_first;
-    $is_first = is_null($is_first);
+    $is_first = null === $is_first;
 
     // fixed bug for XooNIpsItemLibraryObject::getBasicInformationArray()
     if (!is_numeric($basic['creation_date'])) {
