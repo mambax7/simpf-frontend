@@ -1369,7 +1369,7 @@ class XMLRPC_Client
         $output .= 'Content-Length: '.strlen($xml)."\r\n";
         $output .= "\r\n";
         $output .= $xml;
-        if (!fputs($fp, $output, strlen($output))) {
+        if (!fwrite($fp, $output, strlen($output))) {
             $this->_errors[] = 'failed to write request';
 
             return $ret;
