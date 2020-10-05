@@ -63,8 +63,8 @@ function xoops_module_install_xnponlinesimulation($xoopsMod)
     $ret[] = 'Run install script';
 
     // check xoonips module
-    $module_handler = &xoops_gethandler('module');
-    $module_obj = &$module_handler->getByDirname('xoonips');
+    $module_handler = xoops_gethandler('module');
+    $module_obj = $module_handler->getByDirname('xoonips');
     if (!is_object($module_obj)) {
         $ret[] = '+ Error: XooNIps is not installed';
 
@@ -89,16 +89,16 @@ function xoops_module_install_xnponlinesimulation($xoopsMod)
 
     // delete 'module access rights' from all groups
     $ret[] = '+ Delete module access rights from all groups';
-    $member_handler = &xoops_gethandler('member');
-    $gperm_handler = &xoops_gethandler('groupperm');
-    $groups = &$member_handler->getGroupList();
+    $member_handler = xoops_gethandler('member');
+    $gperm_handler = xoops_gethandler('groupperm');
+    $groups = $member_handler->getGroupList();
     foreach ($groups as $groupid => $groupname) {
         if ($gperm_handler->checkRight('module_read', $mid, $groupid)) {
             $criteria = new CriteriaCompo();
             $criteria->add(new Criteria('gperm_groupid', $groupid));
             $criteria->add(new Criteria('gperm_itemid', $mid));
             $criteria->add(new Criteria('gperm_name', 'module_read'));
-            $objects = &$gperm_handler->getObjects($criteria);
+            $objects = $gperm_handler->getObjects($criteria);
             if (1 == count($objects)) {
                 $gperm_handler->delete($objects[0]);
             }
