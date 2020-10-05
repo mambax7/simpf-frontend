@@ -140,7 +140,7 @@ function xoops_module_uninstall_xnponlinesimulation($xoopsMod)
         while ($row = $xoopsDB->fetchRow($res)) {
             $file_id = $row[0];
             $fname = $file_upload_dir.'/'.$file_id;
-            if ('' == $file_upload_dir || !file_exists($fname) || false === @unlink($fname)) {
+            if ('' == $file_upload_dir || !is_file($fname) || false === @unlink($fname)) {
                 $ret[] = '+ Error: Failed to unlink file : '.$file_id;
             }
         }
