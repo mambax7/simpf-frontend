@@ -13,4 +13,4 @@ CREATE TABLE `xnponlinesimulation_item_detail` (
   `contents_count` int(10) unsigned NOT NULL default '0',
   `model_contents_count` int(10) unsigned NOT NULL default '0',
   PRIMARY KEY (`onlinesimulation_id`)
-) TYPE=InnoDB;
+) ENGINE = InnoDB;
