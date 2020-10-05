@@ -40,7 +40,7 @@ if (!isset($_POST['item_id'])) {
     die('illegal request');
 }
 
-$item_id = intval($_POST['item_id']);
+$item_id = (int)$_POST['item_id'];
 $target = $_POST['target'];
 $detail_handler = &xoonips_getormhandler('xnponlinesimulation', 'item_detail');
 $detail_obj = &$detail_handler->get($item_id);

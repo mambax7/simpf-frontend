@@ -105,7 +105,7 @@ class Xnponlinesimulation_xnponlinesimulationRelated extends Legacy_BlockProcedu
         // get by item id
         $item_id = xoops_getrequest('item_id');
         if (isset($item_id)) {
-            return $this->_searchItemId(intval($item_id), false);
+            return $this->_searchItemId((int)$item_id, false);
         }
 
         return false;

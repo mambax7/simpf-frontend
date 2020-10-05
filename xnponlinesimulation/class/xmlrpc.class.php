@@ -258,38 +258,38 @@ class XMLRPC_Utility
     {
         $tm = false;
         if (preg_match('/^(-?\\d{4}|[+-]\\d{6})(?:-?(?:(\\d{2})(?:-?(\\d{2})?)?|W([0-5]\\d)-?([1-7])|([0-3]\\d\\d)))?(?:T(\\d{2})(?::(\\d{2})(?::(\\d{2}))?)?(?:Z|([-+])(\\d{2})(?::?(\\d{2}))?)?)?$/', $value, $matches)) {
-            $year = intval($matches[1]);
+            $year = (int)$matches[1];
             if ($year < 1970 || $year > 2038) {
                 // unsupported year
                 return false;
             }
-            $month = intval($matches[2] ?? 1);
-            $mday = intval($matches[3] ?? 1);
-            $week = intval($matches[4] ?? 0);
-            $wday = intval($matches[5] ?? 0);
-            $oday = intval($matches[6] ?? 0);
-            $hour = intval($matches[7] ?? 0);
-            $min = intval($matches[8] ?? 0);
-            $sec = intval($matches[9] ?? 0);
-            $pm = intval(isset($matches[10]) ? $matches[10].'1' : 1);
-            $tz_hour = intval($matches[11] ?? 0);
-            $tz_min = intval($matches[12] ?? 0);
+            $month = (int)(isset($matches[2]) ? $matches[2] : 1);
+            $mday = (int)(isset($matches[3]) ? $matches[3] : 1);
+            $week = (int)(isset($matches[4]) ? $matches[4] : 0);
+            $wday = (int)(isset($matches[5]) ? $matches[5] : 0);
+            $oday = (int)(isset($matches[6]) ? $matches[6] : 0);
+            $hour = (int)(isset($matches[7]) ? $matches[7] : 0);
+            $min = (int)(isset($matches[8]) ? $matches[8] : 0);
+            $sec = (int)(isset($matches[9]) ? $matches[9] : 0);
+            $pm = (int)(isset($matches[10]) ? $matches[10] . '1' : 1);
+            $tz_hour = (int)(isset($matches[11]) ? $matches[11] : 0);
+            $tz_min = (int)(isset($matches[12]) ? $matches[12] : 0);
             $tz_offset = $pm * ($tz_hour * 3600 + $tz_min * 60);
             if (0 == $week && 0 == $wday && 0 == $oday) {
                 // calendar dates
-                $tm = intval(gmmktime($hour, $min, $sec, $month, $mday, $year));
+                $tm = (int)gmmktime($hour, $min, $sec, $month, $mday, $year);
             } else {
-                $tsm = intval(gmmktime(0, 0, 0, 1, 1, $year));
+                $tsm = (int)gmmktime(0, 0, 0, 1, 1, $year);
                 if (0 != $week && 0 != $wday) {
                     // week dates
-                    $days = ($week - 1) * 7 - intval(gmdate('w', $tsm)) + $wday;
+                    $days = ($week - 1) * 7 - (int)gmdate('w', $tsm) + $wday;
                 } else {
                     // ordinal dates
                     $days = $oday;
                 }
                 $tm = $tsm + $days * 86400 + $hour * 3600 + $min * 60 + $sec;
             }
-            $tm = intval($tm) + $tz_offset;
+            $tm = (int)$tm + $tz_offset;
         }
 
         return $tm;
@@ -767,7 +767,7 @@ class XMLRPC_Response
             $this->_condition_push_value($util->get_value_type($name), $value);
             break;
         case 'boolean':
-            $value = (1 == intval($cdata));
+            $value = (1 == (int)$cdata);
             $this->_condition_push_value($util->get_value_type($name), $value);
             break;
         case 'dateTime.iso8601':
@@ -775,12 +775,12 @@ class XMLRPC_Response
             $this->_condition_push_value($util->get_value_type($name), $value);
             break;
         case 'double':
-            $value = floatval($cdata);
+            $value = (float)$cdata;
             $this->_condition_push_value($util->get_value_type($name), $value);
             break;
         case 'i4':
         case 'int':
-            $value = intval($cdata);
+            $value = (int)$cdata;
             $this->_condition_push_value($util->get_value_type($name), $value);
             break;
         case 'string':
@@ -1201,7 +1201,7 @@ class XMLRPC_Client
         if (preg_match($uri_pattern, $uri, $matches)) {
             $this->_protocol = $matches[1];
             $this->_host = $matches[2];
-            $this->_port = ('' != $matches[3]) ? intval($matches[3]) : ('https' == $this->_protocol ? 443 : 80);
+            $this->_port = ('' != $matches[3]) ? (int)$matches[3] : ('https' == $this->_protocol ? 443 : 80);
             $this->_path = ('' != $matches[4]) ? $matches[4] : '/';
         }
     }

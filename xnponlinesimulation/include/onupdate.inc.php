@@ -37,9 +37,9 @@ function xoops_module_update_xnponlinesimulation($xoopsMod, $oldversion)
 {
     global $xoopsDB;
     $mydirname = basename(dirname(__DIR__));
-    $mid = intval($xoopsMod->getVar('mid', 'n'));
+    $mid = (int)$xoopsMod->getVar('mid', 'n');
 
-    $version = intval($xoopsMod->getVar('version', 'n'));
+    $version = (int)$xoopsMod->getVar('version', 'n');
 
     // for Cube 2.1
     global $ret;

@@ -38,7 +38,7 @@ function xoops_module_install_xnponlinesimulation($xoopsMod)
     global $xoopsDB;
 
     $mydirname = basename(dirname(__DIR__));
-    $mid = intval($xoopsMod->getVar('mid', 'n'));
+    $mid = (int)$xoopsMod->getVar('mid', 'n');
 
     $required_version = 3.49;
 
@@ -70,7 +70,7 @@ function xoops_module_install_xnponlinesimulation($xoopsMod)
 
         return false;
     }
-    $version = intval($module_obj->getVar('version', 'n'));
+    $version = (int)$module_obj->getVar('version', 'n');
     if ($version < $required_version * 100) {
         $ret[] = '+ Error: XooNIps '.$required_version.' or higher required';
 
