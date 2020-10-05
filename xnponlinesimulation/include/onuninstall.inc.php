@@ -169,7 +169,7 @@ function xoops_module_uninstall_xnponlinesimulation($xoopsMod)
     return true;
 }
 
-function xnponlinesimulation_message_append_onuninstall(&$module_obj, &$log)
+function xnponlinesimulation_message_append_onuninstall(&$module_obj, $log)
 {
     if (is_array(@$GLOBALS['ret'])) {
         foreach ($GLOBALS['ret'] as $message) {

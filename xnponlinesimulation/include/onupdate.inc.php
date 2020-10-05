@@ -70,7 +70,7 @@ function xoops_module_update_xnponlinesimulation($xoopsMod, $oldversion)
     return true;
 }
 
-function xnponlinesimulation_message_append_onupdate(&$xoopsMod, &$log)
+function xnponlinesimulation_message_append_onupdate(&$xoopsMod, $log)
 {
     if (is_array(@$GLOBALS['ret'])) {
         foreach ($GLOBALS['ret'] as $message) {

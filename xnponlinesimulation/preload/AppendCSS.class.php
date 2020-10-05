@@ -12,7 +12,7 @@ class Xnponlinesimulation_AppendCSS extends XCube_ActionFilter
      *
      * @param object &$xoopsTpl instance of XoopsTpl object
      */
-    public function appendCSS(&$xoopsTpl)
+    public function appendCSS($xoopsTpl)
     {
         $xoops_module_header = sprintf('<link rel="stylesheet" type="text/css" href="%s/modules/xoonips/backend.php?itemtype=xnponlinesimulation&amp;action=css" />', XOOPS_URL);
         $xoops_module_header .= $xoopsTpl->get_template_vars('xoops_module_header');

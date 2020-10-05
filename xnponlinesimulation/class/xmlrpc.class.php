@@ -977,7 +977,7 @@ class XMLRPC_Response
      * @param int   $type   value type
      * @param mixed &$value value
      */
-    public function _condition_push_value($type, &$value)
+    public function _condition_push_value($type, $value)
     {
         $this->_condition['values'][] = new XMLRPC_Value($type, $value);
     }
@@ -1283,7 +1283,7 @@ class XMLRPC_Client
      *
      * @return object XMLRPC_Response class instance
      */
-    public function &sendMessage(&$method)
+    public function &sendMessage($method)
     {
         $ret = false;
         $this->_errors = [];

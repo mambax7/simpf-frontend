@@ -121,7 +121,7 @@ class XooNIpsClient
         return $item;
     }
 
-    public function putItem(&$item_obj, &$files_obj)
+    public function putItem($item_obj, $files_obj)
     {
         $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
@@ -139,7 +139,7 @@ class XooNIpsClient
         return $item_id;
     }
 
-    public function updateItem(&$item_obj)
+    public function updateItem($item_obj)
     {
         $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
@@ -194,7 +194,7 @@ class XooNIpsClient
         return $file;
     }
 
-    public function updateFile($id, $id_type, $field_name, &$file_obj)
+    public function updateFile($id, $id_type, $field_name, $file_obj)
     {
         $params = [
             new XMLRPC_Value(XMLRPC_VALUE_TYPE_STRING, $this->_session),
@@ -366,7 +366,7 @@ class XooNIpsClient
         return $preferences;
     }
 
-    public function updateItem2(&$item_obj, &$file_obj, $delete_item_ids)
+    public function updateItem2($item_obj, $file_obj, $delete_item_ids)
     {
         $item_ids = [];
         foreach ($delete_item_ids as $item_id) {
@@ -488,7 +488,7 @@ class XooNIpsClient
         return $res;
     }
 
-    public function &_decode_value(&$obj)
+    public function &_decode_value($obj)
     {
         $type = $obj->getType();
         $value = $obj->getValue();

@@ -109,7 +109,7 @@ function xoops_module_install_xnponlinesimulation($xoopsMod)
     return true;
 }
 
-function xnponlinesimulation_message_append_oninstall(&$xoopsMod, &$log)
+function xnponlinesimulation_message_append_oninstall(&$xoopsMod, $log)
 {
     if (is_array(@$GLOBALS['ret'])) {
         foreach ($GLOBALS['ret'] as $message) {
