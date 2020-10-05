@@ -63,7 +63,7 @@ function xoops_module_install_xnponlinesimulation($xoopsMod)
     $ret[] = 'Run install script';
 
     // check xoonips module
-    $module_handler = xoops_gethandler('module');
+    $module_handler = xoops_getHandler('module');
     $module_obj = $module_handler->getByDirname('xoonips');
     if (!is_object($module_obj)) {
         $ret[] = '+ Error: XooNIps is not installed';
@@ -89,8 +89,8 @@ function xoops_module_install_xnponlinesimulation($xoopsMod)
 
     // delete 'module access rights' from all groups
     $ret[] = '+ Delete module access rights from all groups';
-    $member_handler = xoops_gethandler('member');
-    $gperm_handler = xoops_gethandler('groupperm');
+    $member_handler = xoops_getHandler('member');
+    $gperm_handler = xoops_getHandler('groupperm');
     $groups = $member_handler->getGroupList();
     foreach ($groups as $groupid => $groupname) {
         if ($gperm_handler->checkRight('module_read', $mid, $groupid)) {
