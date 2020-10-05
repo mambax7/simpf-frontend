@@ -37,7 +37,7 @@ function xoops_module_uninstall_xnponlinesimulation($xoopsMod)
 {
     global $xoopsDB;
 
-    $mydirname = basename(dirname(dirname(__FILE__)));
+    $mydirname = basename(dirname(__DIR__));
     $mid = intval($xoopsMod->getVar('mid', 'n'));
 
     // for Cube 2.1

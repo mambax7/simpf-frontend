@@ -77,7 +77,7 @@ class Xnponlinesimulation_xnponlinesimulationRelated extends Legacy_BlockProcedu
      */
     private function _loadXooNIps()
     {
-        $mydirname = basename(dirname(dirname(__FILE__)));
+        $mydirname = basename(dirname(__DIR__));
         global $xoopsUser;
         include_once XOOPS_ROOT_PATH.'/modules/xoonips/condefs.php';
         include_once XOOPS_ROOT_PATH.'/modules/xoonips/include/functions.php';

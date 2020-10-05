@@ -103,7 +103,7 @@ class XNPOnlinesimulationCompoHandler extends XooNIpsItemInfoCompoHandler
     public function getTemplateVar($type, $item_id, $uid)
     {
         include_once XOONIPS_PATH.'/include/AL.php';
-        include_once dirname(dirname(__FILE__)).'/include/view.php';
+        include_once dirname(__DIR__) . '/include/view.php';
         $result = [];
         switch ($type) {
         case XOONIPS_TEMPLATE_TYPE_TRANSFER_ITEM_DETAIL:

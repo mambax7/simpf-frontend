@@ -32,7 +32,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
     exit();
 }
 
-$itemtype_path = dirname(dirname(__FILE__));
+$itemtype_path = dirname(__DIR__);
 $itemtype_dirname = basename($itemtype_path);
 
 $langman = &xoonips_getutility('languagemanager');
@@ -73,7 +73,7 @@ function xnponlinesimulationGetDetailInformation($item_id)
  */
 function xnponlinesimulationGetTopBlock($itemtype)
 {
-    $mydirname = basename(dirname(dirname(__FILE__)));
+    $mydirname = basename(dirname(__DIR__));
     $mod_path = XOOPS_ROOT_PATH.'/modules/'.$mydirname;
     $mod_url = XOOPS_URL.'/modules/'.$mydirname;
 
@@ -104,7 +104,7 @@ function xnponlinesimulationGetTopBlock($itemtype)
 function xnponlinesimulationGetListBlock($basic)
 {
     $item_id = $basic['item_id'];
-    $mydirname = basename(dirname(dirname(__FILE__)));
+    $mydirname = basename(dirname(__DIR__));
     $mod_path = XOOPS_ROOT_PATH.'/modules/'.$mydirname;
     $mod_url = XOOPS_URL.'/modules/'.$mydirname;
     $detail = xnponlinesimulationGetDetailInformation($item_id);
@@ -162,7 +162,7 @@ function xnponlinesimulationGetPrinterFriendlyListBlock($basic)
  */
 function xnponlinesimulationGetDetailBlock($item_id)
 {
-    $mydirname = basename(dirname(dirname(__FILE__)));
+    $mydirname = basename(dirname(__DIR__));
     $mod_path = XOOPS_ROOT_PATH.'/modules/'.$mydirname;
     $mod_url = XOOPS_URL.'/modules/'.$mydirname;
     $basic = xnpGetBasicInformationDetailBlock($item_id);
@@ -221,7 +221,7 @@ function xnponlinesimulationGetDetailBlock($item_id)
  */
 function xnponlinesimulationGetPrinterFriendlyDetailBlock($item_id)
 {
-    $mydirname = basename(dirname(dirname(__FILE__)));
+    $mydirname = basename(dirname(__DIR__));
     $mod_path = XOOPS_ROOT_PATH.'/modules/'.$mydirname;
     $mod_url = XOOPS_URL.'/modules/'.$mydirname;
     $basic = xnpGetBasicInformationPrinterFriendlyBlock($item_id);
@@ -284,7 +284,7 @@ function xnponlinesimulationGetRegisterBlock()
  */
 function xnponlinesimulationGetEditBlock($item_id)
 {
-    $mydirname = basename(dirname(dirname(__FILE__)));
+    $mydirname = basename(dirname(__DIR__));
     $mod_path = XOOPS_ROOT_PATH.'/modules/'.$mydirname;
     $mod_url = XOOPS_URL.'/modules/'.$mydirname;
 
@@ -384,7 +384,7 @@ function xnponlinesimulationCheckEditParameters(&$message)
  */
 function xnponlinesimulationGetConfirmBlock($item_id)
 {
-    $mydirname = basename(dirname(dirname(__FILE__)));
+    $mydirname = basename(dirname(__DIR__));
     $mod_path = XOOPS_ROOT_PATH.'/modules/'.$mydirname;
     $mod_url = XOOPS_URL.'/modules/'.$mydirname;
 
@@ -433,7 +433,7 @@ function xnponlinesimulationGetConfirmBlock($item_id)
  */
 function xnponlinesimulationInsertItem(&$item_id)
 {
-    $mydirname = basename(dirname(dirname(__FILE__)));
+    $mydirname = basename(dirname(__DIR__));
     $mod_path = XOOPS_ROOT_PATH.'/modules/'.$mydirname;
     $mod_url = XOOPS_URL.'/modules/'.$mydirname;
 
@@ -542,7 +542,7 @@ function xnponlinesimulationGetModifiedFields($item_id)
  */
 function xnponlinesimulationGetDetailInformationQuickSearchQuery(&$wheres, &$join, $keywords)
 {
-    $mydirname = basename(dirname(dirname(__FILE__)));
+    $mydirname = basename(dirname(__DIR__));
     global $xoopsDB;
     $detail_table = $xoopsDB->prefix($mydirname.'_item_detail');
     $keyword_fields = [
@@ -564,7 +564,7 @@ function xnponlinesimulationGetDetailInformationQuickSearchQuery(&$wheres, &$joi
  */
 function xnponlinesimulationGetAdvancedSearchBlock(&$search_vars)
 {
-    $mydirname = basename(dirname(dirname(__FILE__)));
+    $mydirname = basename(dirname(__DIR__));
     $mod_path = XOOPS_ROOT_PATH.'/modules/'.$mydirname;
     $mod_url = XOOPS_URL.'/modules/'.$mydirname;
     // search variables
@@ -600,7 +600,7 @@ function xnponlinesimulationGetAdvancedSearchBlock(&$search_vars)
  */
 function xnponlinesimulationGetAdvancedSearchQuery(&$where, &$join)
 {
-    $mydirname = basename(dirname(dirname(__FILE__)));
+    $mydirname = basename(dirname(__DIR__));
     global $xoopsDB;
     $detail_table = $xoopsDB->prefix($mydirname.'_item_detail');
     $wheres = [];
@@ -636,7 +636,7 @@ function xnponlinesimulationGetAdvancedSearchQuery(&$where, &$join)
  */
 function xnponlinesimulationExportItem($path, $fp, $item_id, $with_file)
 {
-    $mydirname = basename(dirname(dirname(__FILE__)));
+    $mydirname = basename(dirname(__DIR__));
     $mod_path = XOOPS_ROOT_PATH.'/modules/'.$mydirname;
     $mod_url = XOOPS_URL.'/modules/'.$mydirname;
     if (!$fp) {
@@ -758,7 +758,7 @@ function xnponlinesimulationSupportMetadataFormat($prefix, $item_id)
  */
 function xnponlinesimulationGetMetadata($prefix, $item_id)
 {
-    $mydirpath = dirname(dirname(__FILE__));
+    $mydirpath = dirname(__DIR__);
     $mydirname = basename($mydirpath);
     if (!in_array($prefix, ['oai_dc', 'junii2'])) {
         return false;

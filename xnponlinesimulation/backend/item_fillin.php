@@ -67,8 +67,8 @@ if (!defined('XOONIPS_PATH')) {
 
 // class file
 require_once XOONIPS_PATH.'/class/base/JSON.php';
-require_once dirname(dirname(__FILE__)).'/class/xmlrpc.class.php';
-require_once dirname(dirname(__FILE__)).'/class/xoonips_client.class.php';
+require_once dirname(__DIR__) . '/class/xmlrpc.class.php';
+require_once dirname(__DIR__) . '/class/xoonips_client.class.php';
 
 // change internal encoding to UTF-8
 if (extension_loaded('mbstring')) {

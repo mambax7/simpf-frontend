@@ -36,7 +36,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 function xoops_module_update_xnponlinesimulation($xoopsMod, $oldversion)
 {
     global $xoopsDB;
-    $mydirname = basename(dirname(dirname(__FILE__)));
+    $mydirname = basename(dirname(__DIR__));
     $mid = intval($xoopsMod->getVar('mid', 'n'));
 
     $version = intval($xoopsMod->getVar('version', 'n'));
