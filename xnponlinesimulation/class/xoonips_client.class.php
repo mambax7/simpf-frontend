@@ -461,7 +461,7 @@ class XooNIpsClient
         echo 'Error('.$this->_fault_code.') : "'.$this->_fault_string.'"'."\n";
     }
 
-    public function &_send(&$method)
+    public function &_send($method)
     {
         $this->_fault_code = 0;
         $this->_fault_string = '';
