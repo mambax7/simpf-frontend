@@ -525,7 +525,7 @@ function xnponlinesimulationGetModifiedFields($item_id)
     ];
     foreach ($fields as $key => $label) {
         if ($detail_old[$key] != $detail_new[$key]) {
-            array_push($ret, $label);
+            $ret[] = $label;
         }
     }
 
